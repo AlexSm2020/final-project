@@ -4,11 +4,14 @@ const mongoose = require('mongoose');
 // Creating our User model
 const Schema = mongoose.Schema
 
+// Creating a method to ensure users enter valid emails when signing up.
+
 var validateEmail = function (email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
 };
 
+// User schema - setting up our data schema for adding users to database.
 const UserSchema = new Schema({
     firstName: {
         type: String
