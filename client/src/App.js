@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import Main from './components/main';
+import axios from "axios"
 import {Link} from 'react-router-dom';
 
 class App extends Component {
@@ -16,6 +17,40 @@ class App extends Component {
  updateUser = (userObject) => {
   this.setState(userObject)
 }
+
+componentDidMount(){
+  axios.get("/user")
+    .then((response, error) => {
+      if (error) {
+        console.log(error.message)
+      }
+      this.setState({
+        loggedIn: true,
+        username: response.data.username,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName
+      })
+    })
+}
+
+logout = () => {
+  axios.get("user/logout")
+  .then((response, error) => {
+    if (error) {
+      console.log(error.message)
+    }
+    else {
+      console.log(response)
+      this.setState({
+        loggedIn: false,
+        firstName: "",
+        lastName: "",
+        username: ""
+      })
+    }
+  })
+}
+
   render() {
     return (
       <div className="demo-big-content">
@@ -27,6 +62,7 @@ class App extends Component {
                 <Link to="/login">Log In</Link>
                 <Link to="/contact">Contact Us</Link>
                 <Link to="/search">Search</Link>
+                <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
         </Header>
         <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">JobSearchApp</Link>}>

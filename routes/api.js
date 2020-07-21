@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const JobPosts = require("../models/JobPosts");
-const isAuthenticated = require("../config/middleware/isAuthenticated")
 
 // Accessing our models and passport for login/signup 
 
@@ -48,7 +47,7 @@ router.post("/signup", function (req, res) {
     })
         .then(function () {
             console.log("user successfully added")
-            res.redirect(307, "user/login")
+            res.redirect(307, "/user/login")
         })
         .catch(function (err) {
             console.log(err.message)
@@ -56,32 +55,22 @@ router.post("/signup", function (req, res) {
         });
 })
 
-// Here we've added our isAuthenticated middleware to help make sure only logged-in users have access to the members page
-// If a user who is not logged in tries to access this route they will be redirected to the signup page
+// Home route - we're sending back user info as a json block to store in app.js state to be used for conditional rendering.
 
-router.get("/members", isAuthenticated, function (req, res) {
-    res.json(req.user)
-    console.log("Members page")
+router.get("/", function (req, res){
+    if (req.user) {
+        res.json(req.user)
+    }
 })
 
-router.get("/", isAuthenticated, function (req, res){
-    res.json(req.user)
+// Logout route - clears passport session and logs the user out
+
+router.get("/logout", function (req, res) {
+    req.logout()
+    res.redirect("/")
 })
 
 // Routes
-router.get('/user', (req, res) => {
-
-    console.log("Home Page")
-
-    // JobPosts.find({  })
-    //     .then((data) => {
-    //         console.log('Data: ', data);
-    //         res.json(data);
-    //     })
-    //     .catch((error) => {
-    //         console.log('error: ', daerrorta);
-    //     });
-});
 
 router.post('/save', (req, res) => {
     const data = req.body;

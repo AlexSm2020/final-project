@@ -5,6 +5,8 @@ import axios from 'axios';
 
 class Register extends Component {
 
+  // Using constructor to build out Register component class which will be exported to app.js for rendering.
+
   constructor(props) {
     super(props)
     this.state = {
@@ -14,10 +16,13 @@ class Register extends Component {
       password: "",
       redirectTo: ""
     }
+    // Binding functions to class in ordere to be able to use functions in JSX below.
     this.resetUserInputs = this.resetUserInputs.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
+
+  // Function designed to set state inputs back to empty after submitting form.
 
   resetUserInputs = () => {
     this.setState({
@@ -29,6 +34,7 @@ class Register extends Component {
     });
   };
 
+  // Function to edit state values upon input change
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
@@ -39,6 +45,7 @@ class Register extends Component {
     });
   };
 
+  // This function will take in the inputs and submit the registration form to our database to store the user. 
   handleFormSubmit = event => {
     event.preventDefault()
 
@@ -49,26 +56,25 @@ class Register extends Component {
       password: this.state.password
     }
 
-    console.log(payload)
-
+    // Using an axios call to hit our Express route for registering user in our database.
     axios.post("user/signup", payload)
       .then( function (response) {
-        console.log(response.data);
-        if (response.data) {
+        // If we get back a response from our database, we determine this to be successful and can redirect the user to the home screen.
+        if (response.data.redirect) {
           console.log("successful signup")
-          this.setState({
-            redirect: "/login"
-          })
+          window.location = "/"
         } else {
           console.log("Sign-up error");
         }
       }.bind(this))
+      // If we get a server error, alert user of error.
       .catch(err => {
         console.log("Sign up server error: ")
         console.log(err);
       })
   }
   
+  // Below is the JSX code to render in app.js. A simple form for registering the user.
   render() {
     return (
       <div className="container h-100">
