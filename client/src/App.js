@@ -2,9 +2,20 @@ import React, { Component } from 'react';
 import './App.css';
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import Main from './components/main';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class App extends Component {
+  state = {
+    loggedIn: false,
+    username: "",
+    redirect: false,
+    redirectTo: null,
+    component: null
+  }
+
+ updateUser = (userObject) => {
+  this.setState(userObject)
+}
   render() {
     return (
       <div className="demo-big-content">
@@ -13,7 +24,7 @@ class App extends Component {
             <Navigation>
                 <Link to="/register">Register Today</Link>
                 <Link to="/about">About Us</Link>
-                <Link to="/logIn">Log In</Link>
+                <Link to="/login">Log In</Link>
                 <Link to="/contact">Contact Us</Link>
                 <Link to="/search">Search</Link>
             </Navigation>
@@ -22,14 +33,14 @@ class App extends Component {
             <Navigation>
               <Link to="/register">Register Today</Link>
               <Link to="/about">About Us</Link>
-              <Link to="/logIn">Log In</Link>
+              <Link to="/login">Log In</Link>
               <Link to="/contact">Contact Us</Link>
               <Link to="/search">Search</Link>
             </Navigation>
         </Drawer>
         <Content>
             <div className="page-content" />
-            <Main/>
+            <Main redirect={this.state.redirect} redirectTo={this.state.redirectTo} component={this.state.component} updateUser={this.updateUser} />
         </Content>
     </Layout>
 </div>

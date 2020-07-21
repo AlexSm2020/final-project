@@ -16,7 +16,7 @@ const UserSchema = new Schema({
     lastName: {
         type: String
     },
-    email: {
+    username: {
         type: String,
         trim: true,
         lowercase: true,

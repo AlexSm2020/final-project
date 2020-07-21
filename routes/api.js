@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const JobPosts = require("../models/JobPosts");
+const isAuthenticated = require("../config/middleware/isAuthenticated")
 
 // Accessing our models and passport for login/signup 
 
@@ -13,8 +14,18 @@ const passport = require("../config/passport")
 // Using the passport.authenticate middleware with our local strategy.
     // If the user has valid login credentials, send them to the members page.
     // Otherwise the user will be sent an error
-router.post("/login", passport.authenticate("local"), function (req, res) {
-    res.json(req.user);
+router.post(
+    "/login", 
+    passport.authenticate("local"),
+    (req, res) => {
+        if (req.user || req.session.user) {
+            var redir = { redirect: "/" };
+            return res.json(redir)
+        }
+        else {
+            var redir = { redirect: "/login" }
+            return res.json(redir)
+        }
  });
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -25,15 +36,19 @@ router.post("/signup", function (req, res) {
     
     console.log(req.body)
 
+    console.log("user signup")
+
+    req.session.username = req.body.email
+
     db.User.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password
     })
-        .then(function (dbUser) {
+        .then(function () {
             console.log("user successfully added")
-            res.redirect(307, "/api/login");
+            res.redirect(307, "user/login")
         })
         .catch(function (err) {
             console.log(err.message)
@@ -41,14 +56,20 @@ router.post("/signup", function (req, res) {
         });
 })
 
+// Here we've added our isAuthenticated middleware to help make sure only logged-in users have access to the members page
+// If a user who is not logged in tries to access this route they will be redirected to the signup page
 
+router.get("/members", isAuthenticated, function (req, res) {
+    res.json(req.user)
+    console.log("Members page")
+})
 
-
-
-
+router.get("/", isAuthenticated, function (req, res){
+    res.json(req.user)
+})
 
 // Routes
-router.get('/', (req, res) => {
+router.get('/user', (req, res) => {
 
     console.log("Home Page")
 
