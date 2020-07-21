@@ -49,14 +49,9 @@ handleFormSubmit = event => {
       console.log(response)
       if (response.status=== 200) {
         console.log("200")
-        // update App.js state
-        this.props.updateUser({
-          loggedIn: true,
-          username: response.data.username
-        })
 
         if (response.data.redirect === "/") {
-          window.location = "/members"
+          window.location = "/"
         }
         else if (response.data.redirect === "/login") {
           window.location = "/login"
