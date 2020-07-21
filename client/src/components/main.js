@@ -4,20 +4,21 @@ import { Switch, Route } from 'react-router-dom';
 import LandingPage from './landingpage';
 import About from './about';
 import Contact from './contact';
-import logIn from './logIn';
+import LogIn from './logIn';
 import Register from './register';
 import Search from './search';
 
-
-const Main = () => (
+const Main = (props) => (
   <Switch>
     <Route exact path="/" component={LandingPage} />
-    <Route path="/members" component={LandingPage} />
-    <Route path="/about" component={About} />
-    <Route path="/contact" component={Contact} />
-    <Route path="/login" component={logIn} />
-    <Route path="/register" component={Register} />
-    <Route path="/search" component={Search} />
+    <Route exact path="/members" component={LandingPage} />
+    <Route exact path="/about" component={About} />
+    <Route exact path="/contact" component={Contact} />
+    <Route exact path="/login" render= {() =>
+      <LogIn updateUser={props.updateUser} />
+    }/>
+    <Route exact path="/register" component={Register} />
+    <Route exact path="/search" component={Search} />
   </Switch>
 )
 

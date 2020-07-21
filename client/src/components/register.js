@@ -5,11 +5,18 @@ import axios from 'axios';
 
 class Register extends Component {
 
-  state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      redirectTo: ""
+    }
+    this.resetUserInputs = this.resetUserInputs.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   resetUserInputs = () => {
@@ -17,7 +24,8 @@ class Register extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      password: "",
+      redirecTo: ""
     });
   };
 
@@ -37,35 +45,41 @@ class Register extends Component {
     const payload = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      email: this.state.email,
+      username: this.state.email,
       password: this.state.password
     }
 
     console.log(payload)
 
-    axios.post("api/signup", payload)
-      .then(res => {
-        console.log(res);
-        window.location.replace("/members");
-      })
+    axios.post("user/signup", payload)
+      .then( function (response) {
+        console.log(response.data);
+        if (response.data) {
+          console.log("successful signup")
+          this.setState({
+            redirect: "/login"
+          })
+        } else {
+          console.log("Sign-up error");
+        }
+      }.bind(this))
       .catch(err => {
+        console.log("Sign up server error: ")
         console.log(err);
-        console.log(err.response);
       })
   }
-
-
+  
   render() {
     return (
       <div className="container h-100">
         <div className= "d-flex justify-content-center h-100">
-          <div className="user_card">
+          <div className="user_card_signup">
             <div className="d-flex justify-content-center">
-              <div className="brand_logo_container">
-                <img src={logo} className="brand_logo" alt="logo"></img>
+              <div className="brand_logo_container_signup">
+                <img src={logo} className="brand_logo_signup" alt="logo"></img>
               </div>
             </div>
-            <div className="d-flex justify-content-center form_container">
+            <div className="d-flex justify-content-center form_container_signup">
               <form className="signup">
                 <div className="form-group">
                   <label>First Name</label>
@@ -98,7 +112,7 @@ class Register extends Component {
                   name="email"
                   onChange={this.handleInputChange}
                   type="email" 
-                  className="form-control" 
+                  className="form-control input_user" 
                   placeholder="Email">
 
                   </input>
@@ -110,12 +124,12 @@ class Register extends Component {
                   name="password"
                   onChange={this.handleInputChange}
                   type="password" 
-                  className="form-control" 
+                  className="form-control input_pass" 
                   placeholder="Password">
 
                   </input>
                 </div>
-                <button onClick={this.handleFormSubmit} className="btn btn-primary login_btn">Sign Up</button>
+                <button onClick={this.handleFormSubmit} className="btn btn-primary signup_btn">Sign Up</button>
               </form>
             </div>
             <div className="mt-4">

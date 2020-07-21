@@ -20,7 +20,7 @@ html {
 			height: 100%;
 			background: #ffffff !important;
 		}
-		.user_card {
+		.user_card_signup {
 			height: 700px;
 			width: 500px;
 			margin-top: 100px;
@@ -37,7 +37,7 @@ html {
 			border-radius: 5px;
 
 		}
-		.brand_logo_container {
+		.brand_logo_container_signup {
             position: absolute;
 			height: 170px;
 			width: 170px;
@@ -47,13 +47,13 @@ html {
 			padding: 10px;
 			text-align: center;
 		}
-		.brand_logo {
+		.brand_logo_signup {
 			height: 150px;
 			width: 150px;
 			border-radius: 50%;
 			border: 2px solid white;
 		}
-		.form_container {
+		.form_container_signup {
 			margin-top: 100px;
 		}
 		.signup_btn {
@@ -79,3 +79,68 @@ html {
 			box-shadow: none !important;
 			outline: 0px !important;
 		}
+
+/* CSS FOR LOGIN PAGE */
+		.user_card_login {
+			height: 400px;
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: #89b08b;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		.brand_logo_container_login {
+            position: absolute;
+			height: 170px;
+			width: 170px;
+			top: -75px;
+			border-radius: 50%;
+			background: #3C5148;
+			padding: 10px;
+			text-align: center;
+		}
+		.brand_logo_login {
+			height: 150px;
+			width: 150px;
+			border-radius: 50%;
+			border: 2px solid white;
+		}
+		.form_container_login {
+			margin-top: 100px;
+		}
+		.login_btn {
+			width: 100%;
+			background: #3C5148 !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #c0392b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user_login,
+		.input_pass_login:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+			background-color: red!important;
+		}
+
