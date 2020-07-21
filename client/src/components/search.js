@@ -21,7 +21,7 @@ class Search extends React.Component {
     submit = (event) => {
         event.preventDefault();
         this.setState({results: []});
-        axios.post('api/indeed', this.state)
+        axios.post('user/indeed', this.state)
             .then((response) => this.setState({results: response.data.results}));
     }
 
@@ -34,19 +34,19 @@ class Search extends React.Component {
                     <h1>Job Search Form</h1>
                     <form id="search-form">
                         <div className="form-group">
-                            <label for="query">Search</label>
+                            <label>Search</label>
                             <input type="text" className="form-control" name="query" aria-describedby="query" onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label for="location">Location</label>
+                            <label>Location</label>
                             <input type="text" className="form-control" name="location" aria-describedby="location" placeholder="" onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label for="radius">Radius (mi)</label>
+                            <label>Radius (mi)</label>
                             <input type="text" className="form-control" name="radius" aria-describedby="radius" placeholder="" onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
-                            <label for="type">Job Type</label>
+                            <label>Job Type</label>
                             <select className="form-control" name="jobType" defaultValue="" onChange={this.handleChange}>
                                 <option disabled></option>
                                 <option>Full-Time</option>

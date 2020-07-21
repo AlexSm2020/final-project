@@ -22,21 +22,10 @@ const ApplicationSchema = new Schema({
     company: {
         type: String
     },
-    // Description of company (pre-populated from job found through our app, or user manual input if manual application )
-    companyDescription: {
-        type: String
-    },
-    // Description of job opening listed on advertisement (pre-populated from job found through our app, or user manual input if manual application )
-    jobDescription: {
-        type: String
-    },
 
-    // Qualifications listed on job advertisement (pre-populated from job found through our app, or user manual input if manual application )
-    qualifications: {
-        type: String
-    },
-    // Any additional job information listed on job advertisement (pre-populated from job found through our app, or user manual input if manual application )
-    additionalJobInfo: {
+    // Link to job advertisement
+    
+    jobAdURL: {
         type: String
     },
 
