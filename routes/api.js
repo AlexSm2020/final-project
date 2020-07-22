@@ -131,8 +131,9 @@ router.post("/startApplication", async function (req, res) {
             }
             res.json({success: "application and tasks added successfully"})
         }
-
-        res.json(dbApplication)
+        else {
+            res.json(dbApplication)
+        }
     }
     catch (error) {
         console.log("Error in Creating Application")
