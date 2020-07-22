@@ -53,16 +53,14 @@ const ApplicationSchema = new Schema({
 
     // This will be a way we can give users the ability to add tasks pertinent to a job application. E.g. send in application, follow-up with resources, complete coding assessment, etc. 
     // Manually entered by user
-    task: {
-        type: String
-    },
+    // Referencing task model connecting on application.id
 
-    // Nested information about the task. With due-date, we could incorporate a way to remind users about upcoming due dates on tasks. 
-    nested: {
-        taskTitle: {type: String},
-        taskDescription: {type: String},
-        taskDueDate: {type: Date}
-    }
+    tasks: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Task"
+        }
+    ]
 });
 
 const Application = mongoose.model("Application", ApplicationSchema);

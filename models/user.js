@@ -31,7 +31,13 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    applications: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Application"
+        }
+    ]
 
 });
 
