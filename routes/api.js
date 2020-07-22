@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const JobPosts = require("../models/JobPosts");
 
 // Accessing our models and passport for login/signup 
 
@@ -32,8 +31,6 @@ router.post(
 // otherwise send back an error
 
 router.post("/signup", function (req, res) {
-    
-    console.log(req.body)
 
     console.log("user signup")
 
@@ -70,34 +67,6 @@ router.get("/logout", function (req, res) {
     res.redirect("/")
 })
 
-// Routes
-
-router.post('/save', (req, res) => {
-    const data = req.body;
-
-    const newJobPost = new JobPosts(data);
-
-    newJobPost.save((error) => {
-        if (error) {
-            res.status(500).json({ msg: 'Sorry, internal server errors' });
-            return;
-        }
-        // BlogPost
-        return res.json({
-            msg: 'Your data has been saved!!!!!! for Mongo'
-        });
-    });
-});
-
-
-router.get('/name', (req, res) => {
-    const data =  {
-        username: 'peterson',
-        age: 5
-    };
-    res.json(data);
-});
-
 // Takes query parameters from search form and generates URL string for API call
 router.post('/indeed', (req, res) => {
 
@@ -118,6 +87,57 @@ router.post('/indeed', (req, res) => {
           res.json(JSON.parse(body));
         }
       )
+})
+
+// Post route to save application in our database for user to update and track moving forward. 
+
+router.post("/startApplication", async function (req, res) {
+    
+    try {
+        const application = {
+            title: req.body.title,
+            location: req.body.location,
+            status: req.body.status,
+            company: req.body.company,
+            jobAdURL: req.body.jobAdURL,
+            interest: req.body.interest,
+            lastComm: req.body.lastComm,
+            lastCommDate: req.body.lastCommDate,
+            notes: req.body.notes
+        }
+
+    // Create and store application in database using application object above
+
+    const dbApplication = await db.Application.create(application)
+
+    // If the user entered a task in creating the application, create the task
+
+        if (req.body.tasks) {
+            // Loop through each of the tasks in our array
+            for (i=0; req.body.tasks.length; i++) {
+                // For each task, create the task in database. We can use const dBtask to access id for adding task to application
+                const dbTask = await db.Task.create({
+                    title: task.title,
+                    description: task.description,
+                    dueDate: task.dueDate
+                })
+
+                // Find the application we've just created using the const dbApplication which corresponds with our asynchronous create operation on line 111
+                // Push the task to the tasks array for this specific application.
+
+                await db.Application.findOneAndUpdate({_id: dbApplication._id}, { $push: { tasks: dbTask._id} }, { new: true})                   
+
+
+            }
+            res.json({success: "application and tasks added successfully"})
+        }
+
+        res.json(dbApplication)
+    }
+    catch (error) {
+        console.log("Error in Creating Application")
+        console.log(error.message)
+    }
 })
 
 module.exports = router;
