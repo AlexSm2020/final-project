@@ -22,12 +22,21 @@ class Search extends React.Component {
         event.preventDefault();
         this.setState({results: []});
         axios.post('user/indeed', this.state)
-            .then((response) => this.setState({results: response.data.results}));
+        .then((response) => this.setState({results: response.data.results}));
+    }
+
+    handleSave = (application) => {
+        let applicationObject = {
+            title: application.jobtitle,
+            location: application.formattedLocationFull,
+            company: application.company,
+            jobAdURL: application.url
+        }
+        axios.post('user/startApplication', applicationObject)
     }
 
     render() {
         console.log('State: ', this.state);
-        //JSX
         return (
             <div className="row">
                 <div className="col-5">
@@ -63,6 +72,8 @@ class Search extends React.Component {
                 <div className="col-7">
                     {(this.state.results).map(result => (
                         <SearchResultCard
+                            key={result.jobkey}
+                            onClick={() => this.handleSave(result)}
                             jobtitle={result.jobtitle}
                             company={result.company}
                             formattedLocationFull={result.formattedLocationFull}
@@ -73,7 +84,6 @@ class Search extends React.Component {
                     ))}
                 </div>
             </div>
-
         );
     }
 }
