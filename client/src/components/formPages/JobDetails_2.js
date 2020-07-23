@@ -19,27 +19,27 @@ class JobDetails_2 extends Component {
                 <label>
                     <input 
                         type="text"
-                        name="jobTitle"
+                        name="status"
                         value={status}
-                        onChange={handleChange('jobTitle')}
+                        onChange={handleChange('status')}
                         placeholder="status"
                     />
                 </label>
                 <label>
                     <input 
                         type="text"
-                        name="jobCompany"
+                        name="qualifications"
                         value={qualifications}
-                        onChange={handleChange('jobCompany')}
+                        onChange={handleChange('qualifications')}
                         placeholder="qualifications"
                     />
                 </label>
                 <label>
                     <input 
                         type="text"
-                        name="jobCompany"
+                        name="interest"
                         value={interest}
-                        onChange={handleChange('jobLocation')}
+                        onChange={handleChange('interest')}
                         placeholder="interest"
                     />
                 </label>
