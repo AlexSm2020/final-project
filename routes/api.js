@@ -68,7 +68,7 @@ router.get("/logout", function (req, res) {
 })
 
 // Takes query parameters from search form and generates URL string for API call
-router.post('/indeed', (req, res) => {
+router.post('/indeed', function (req, res) {
 
     const baseURL = "https://api.indeed.com/ads/apisearch?v=2&userip=1.2.3.4&format=json&limit=25";
     const publisherId = "&publisher=1397045879077994";
@@ -110,6 +110,10 @@ router.post("/startApplication", async function (req, res) {
 
     const dbApplication = await db.Application.create(application)
 
+    // Query database for user and push application to application array on user object. 
+
+    await db.User.findOneAndUpdate({_id: req.user._id}, { $push: { applications: dbApplication._id} }, { new: true})
+
     // If the user entered a task in creating the application, create the task
 
         if (req.body.tasks) {
@@ -140,5 +144,21 @@ router.post("/startApplication", async function (req, res) {
         console.log(error.message)
     }
 })
+
+// Get all applications for a user's view of all applications. Sort by most recent created date.
+
+router.get("/applications", function (req, res) {
+    db.User.findById({_id: req.user._id})
+        .populate({path: "applications", options: { sort: [["createdAt", 'desc']]}})
+        .then(dbApplications => {
+            res.json(dbApplications)
+        })
+
+})
+
+// Updating Task
+
+
+
 
 module.exports = router;
