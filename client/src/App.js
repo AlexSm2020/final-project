@@ -62,6 +62,7 @@ logout = () => {
                 <Link to="/login">Log In</Link>
                 <Link to="/contact">Contact Us</Link>
                 <Link to="/search">Search</Link>
+                <Link to="/userForm">My form</Link>
                 <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
         </Header>
