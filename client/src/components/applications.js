@@ -4,6 +4,10 @@ import axios from "axios"
 
 
 class Applications extends Component {
+    // Creating state to store applications received from axios query
+    state = {
+        applications: ""
+    }
     // Retrieving applications for user upon loading this component. 
     componentDidMount() {
         axios.get("/user/applications")
@@ -12,6 +16,7 @@ class Applications extends Component {
                     console.log(error.message)
                 }
                 console.log(response)
+                this.setState({applications: response.data})
 
             });
     }
@@ -22,33 +27,17 @@ class Applications extends Component {
                 <h4 className="applicationsHeader">My Applications</h4>
             <div>
             <ListGroup>
-                <ListGroupItem>
-                    <ListGroupItemHeading>Application 1</ListGroupItemHeading>
+                {this.state.applications.map(application => (
+                    <ListGroupItem>
+                        <ListGroupItemHeading>{application.title}</ListGroupItemHeading>
                         <ListGroupItemText>
-                            Company Name: 
+                            Company Name: {application.company}
                         </ListGroupItemText>
                         <ListGroupItemText>
-                            Status: 
+                            Status: {application.status}
                         </ListGroupItemText>
-                </ListGroupItem>
-                <ListGroupItem>
-                    <ListGroupItemHeading>Application 2</ListGroupItemHeading>
-                        <ListGroupItemText>
-                            Company Name: 
-                        </ListGroupItemText>
-                        <ListGroupItemText>
-                            Status:
-                        </ListGroupItemText>
-                </ListGroupItem>
-                <ListGroupItem>
-                    <ListGroupItemHeading>Application 3</ListGroupItemHeading>
-                        <ListGroupItemText>
-                            Company Name:
-                        </ListGroupItemText>
-                        <ListGroupItemText>
-                            Status:
-                        </ListGroupItemText>
-                </ListGroupItem>
+                    </ListGroupItem>
+                ))}
             </ListGroup>
             </div >
             </div >
