@@ -7,6 +7,7 @@ import Contact from './contact';
 import LogIn from './logIn';
 import Register from './register';
 import Search from './search';
+import UserForm from './userForm'
 
 const Main = (props) => (
   <Switch>
@@ -19,6 +20,7 @@ const Main = (props) => (
     }/>
     <Route exact path="/register" component={Register} />
     <Route exact path="/search" component={Search} />
+    <Route exact path="/userForm" component={UserForm} />
   </Switch>
 )
 
