@@ -66,7 +66,7 @@ class Register extends Component {
         } else {
           console.log("Sign-up error");
         }
-      }.bind(this))
+      })
       // If we get a server error, alert user of error.
       .catch(err => {
         console.log("Sign up server error: ")

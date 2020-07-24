@@ -27,17 +27,33 @@ class Applications extends Component {
                 <h4 className="applicationsHeader">My Applications</h4>
             <div>
             <ListGroup>
-                {this.state.applications.map(application => (
-                    <ListGroupItem>
-                        <ListGroupItemHeading>{application.title}</ListGroupItemHeading>
+                <ListGroupItem>
+                    <ListGroupItemHeading>Application 1</ListGroupItemHeading>
                         <ListGroupItemText>
-                            Company Name: {application.company}
+                            Company Name: 
                         </ListGroupItemText>
                         <ListGroupItemText>
-                            Status: {application.status}
+                            Status: 
                         </ListGroupItemText>
-                    </ListGroupItem>
-                ))}
+                </ListGroupItem>
+                <ListGroupItem>
+                    <ListGroupItemHeading>Application 2</ListGroupItemHeading>
+                        <ListGroupItemText>
+                            Company Name: 
+                        </ListGroupItemText>
+                        <ListGroupItemText>
+                            Status:
+                        </ListGroupItemText>
+                </ListGroupItem>
+                <ListGroupItem>
+                    <ListGroupItemHeading>Application 3</ListGroupItemHeading>
+                        <ListGroupItemText>
+                            Company Name:
+                        </ListGroupItemText>
+                        <ListGroupItemText>
+                            Status:
+                        </ListGroupItemText>
+                </ListGroupItem>
             </ListGroup>
             </div >
             </div >

@@ -9,6 +9,7 @@ import Register from './register';
 import Search from './search';
 import UserForm from './userForm'
 import Applications from './applications';
+import SingleApplication from './singleApplication';
 
 const Main = (props) => (
   <Switch>
@@ -23,6 +24,7 @@ const Main = (props) => (
     <Route exact path="/search" component={Search} />
     <Route exact path="/userForm" component={UserForm} />
     <Route exact path="/applications" component={Applications} />
+    <Route exact path="/singleApplication" component={SingleApplication} />
   </Switch>
 )
 

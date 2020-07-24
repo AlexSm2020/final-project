@@ -144,3 +144,25 @@ html {
 			background-color: red!important;
 		}
 
+/* CSS for Applications View */
+
+.applicationsHeader {
+	text-align: center;
+}
+
+/* CSS for Single Application View */
+
+.companyLocationDiv {
+	float: right;
+}
+
+.companyName {
+	font-size: x-large;
+	margin-right: 120px;
+}
+
+.companyLocation {
+	font-size: x-large;
+	margin-right: 130px;
+}
+
