@@ -158,7 +158,23 @@ router.get("/applications", function (req, res) {
 
 // Updating Task
 
+// Saving and getting searches
+router.post("/savesearch", function(req, res) {
+    db.SavedSearches.create({
+        name: req.body.name,
+        query: req.body.query,
+        location: req.body.location,
+        radius: req.body.radius,
+        jobType: req.body.jobType
+    })
+})
 
+router.get("/savesearch", function (req, res) {
+    db.SavedSearches.find({})
+    .then(searches => {
+        console.log(res.json(searches))
+    })
+})
 
 
 module.exports = router;
