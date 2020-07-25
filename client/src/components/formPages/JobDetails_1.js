@@ -7,7 +7,7 @@ class JobDetails_1 extends Component{
     }
 
     render(){
-        const { jobTitle, jobCompany, jobLocation, handleChange } = this.props;
+        const { jobTitle, jobCompany, jobLocation, jobAdURL, handleChange } = this.props;
         return(
             <>
                 <h2>Enter your job information:</h2>
@@ -36,6 +36,15 @@ class JobDetails_1 extends Component{
                         value={jobLocation}
                         onChange={handleChange('jobLocation')}
                         placeholder="Location"
+                    />
+                </label>
+                <label>
+                    <input 
+                        type="text"
+                        name="jobAdURL"
+                        value={jobAdURL}
+                        onChange={handleChange('jobAdURL')}
+                        placeholder="Link to job advertisement"
                     />
                 </label>
                 <button className="Next" onClick={this.continue}>
