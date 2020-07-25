@@ -13,7 +13,7 @@ class JobDetails_3 extends Component {
     }
 
     render(){
-        const { LastComm, LastCommDate, notes, handleChange } = this.props;
+        const { LastComm, LastCommDate, notes, pocPhone, handleChange } = this.props;
         return(
             <>
                 <h2>Enter your job information:</h2>
@@ -33,6 +33,15 @@ class JobDetails_3 extends Component {
                         value={LastCommDate}
                         onChange={handleChange('LastCommDate')}
                         placeholder="Last Communication Date"
+                    />
+                </label>
+                <label>
+                    <input 
+                        type="text"
+                        name="pocPhone"
+                        value={pocPhone}
+                        onChange={handleChange('pocPhone')}
+                        placeholder="Contact phone"
                     />
                 </label>
                 <label>

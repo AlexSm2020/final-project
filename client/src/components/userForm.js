@@ -18,9 +18,10 @@ export class StepForm extends Component {
         interest: '',
 
         //step 3
-        LastComm:'',
-        LastCommDate:'',
-        notes:''
+        LastComm: '',
+        LastCommDate: '',
+        pocPhone: '',
+        notes: ''
     }
 
     nextStep = () => {
@@ -43,7 +44,7 @@ export class StepForm extends Component {
     }
 
     showStep = () => {
-        const { step, status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, notes } = this.state;
+        const { step, status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, pocPhone, notes } = this.state;
 
         if(step === 1)
             return (<JobDetails_1 
@@ -73,6 +74,7 @@ export class StepForm extends Component {
                 LastComm={LastComm}
                 LastCommDate={LastCommDate}
                 notes={notes}
+                pocPhone={pocPhone}
 
             />);
         if(step === 4)
@@ -88,6 +90,7 @@ export class StepForm extends Component {
                 LastComm={LastComm}
                 LastCommDate={LastCommDate}
                 notes={notes}
+                pocPhone = {pocPhone}
                 prevStep = {this.prevStep}
             />);
     }

@@ -14,7 +14,7 @@ class AllInfo extends Component {
     }
 
     render(){
-        const { status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, notes  } = this.props;
+        const { status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, pocPhone, notes  } = this.props;
         return(
             <>
                 <h2>Here is the information you entered:</h2>
@@ -27,7 +27,8 @@ class AllInfo extends Component {
                 Interest: <b>{interest}</b><br />
                 Last Communication: <b>{LastComm}</b><br />
                 Last Communication Date:<b>{LastCommDate}</b><br />
-                Extra notes=<b>{notes}</b><br />
+                Contact Phone Info:<b>{pocPhone}</b><br />
+                Extra Notes=<b>{notes}</b><br />
                 <button className="Back" onClick={this.back}>
                     « Make Changes
                 </button>
