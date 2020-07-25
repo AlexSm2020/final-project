@@ -34,6 +34,20 @@ const ApplicationSchema = new Schema({
     interest: {
         type: Number
     },
+    // Point of contact at company
+    poc: {
+        type: String
+    },
+
+    // Point of contact email
+    pocEmail: {
+        type: String
+    },
+
+    // Point of contact phone
+    pocPhone: {
+        type: String
+    },
     // Last communication with company regarding this application. 
     // Manually entered by user. 
     lastComm: {
