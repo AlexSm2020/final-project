@@ -7,9 +7,10 @@ class AllInfo extends Component {
         this.props.prevStep();
     }
 
-    submit = e => {
+    submit = (e,data) => {
         e.preventDefault();
         // PROCESS FORM //
+        console.log(data)
 
     }
 
@@ -34,7 +35,7 @@ class AllInfo extends Component {
                 <button className="Back" onClick={this.back}>
                     « Make Changes
                 </button>
-                <button className="Next" onClick={this.submit}>
+                <button className="Next" onClick={(e)=>this.submit(e,this.props)}>
                 Submit
                 </button>
             </>
