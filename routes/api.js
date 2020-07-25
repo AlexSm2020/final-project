@@ -91,7 +91,7 @@ router.post('/indeed', function (req, res) {
 
 // Post route to save application in our database for user to update and track moving forward. 
 
-router.post("/saveApplication", async function (req, res) {
+router.post("/startApplication", async function (req, res) {
     
     try {
         const application = {
