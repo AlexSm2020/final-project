@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import JobDetails_1 from './formPages/JobDetails_1';
 import JobDetails_2 from './formPages/JobDetails_2';
+import JobDetails_3 from './formPages/JobDetails_3';
 import AllInfo from './formPages/AllInfo';
 
 export class StepForm extends Component {
     state = {
         step: 1,
-
-
-
         // step 1
         jobTitle: '',
         jobCompany: '',
@@ -17,8 +15,12 @@ export class StepForm extends Component {
         // step 2
         status: '',
         qualifications: '',
-        interest: ''
+        interest: '',
 
+        //step 3
+        LastComm:'',
+        LastCommDate:'',
+        notes:''
     }
 
     nextStep = () => {
@@ -41,7 +43,7 @@ export class StepForm extends Component {
     }
 
     showStep = () => {
-        const { step, status, qualifications,interest, jobTitle, jobCompany, jobLocation } = this.state;
+        const { step, status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, notes } = this.state;
 
         if(step === 1)
             return (<JobDetails_1 
@@ -53,17 +55,27 @@ export class StepForm extends Component {
                 jobCompany={jobCompany}
                 jobLocation={jobLocation}
             />);
-        if(step === 2)
-            return (<JobDetails_2 
-                nextStep = {this.nextStep} 
-                prevStep = {this.prevStep}
-                handleChange = {this.handleChange} 
-                status={status} 
+        if (step === 2)
+            return (<JobDetails_2
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                handleChange={this.handleChange}
+                status={status}
                 qualifications={qualifications}
                 interest={interest}
 
             />);
-        if(step === 3)
+        if (step === 3)
+            return (<JobDetails_3
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                handleChange={this.handleChange}
+                LastComm={LastComm}
+                LastCommDate={LastCommDate}
+                notes={notes}
+
+            />);
+        if(step === 4)
             return (<AllInfo 
                 // firstName={firstName} 
                 // lastName={lastName}
@@ -73,6 +85,9 @@ export class StepForm extends Component {
                 jobTitle={jobTitle} 
                 jobCompany={jobCompany}
                 jobLocation={jobLocation}
+                LastComm={LastComm}
+                LastCommDate={LastCommDate}
+                notes={notes}
                 prevStep = {this.prevStep}
             />);
     }

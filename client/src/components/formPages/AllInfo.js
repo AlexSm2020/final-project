@@ -6,8 +6,15 @@ class AllInfo extends Component {
         e.preventDefault();
         this.props.prevStep();
     }
+
+    submit = e => {
+        e.preventDefault();
+        // PROCESS FORM //
+
+    }
+
     render(){
-        const { status, qualifications,interest, jobTitle, jobCompany, jobLocation } = this.props;
+        const { status, qualifications,interest, jobTitle, jobCompany, jobLocation, LastComm, LastCommDate, notes  } = this.props;
         return(
             <>
                 <h2>Here is the information you entered:</h2>
@@ -18,8 +25,14 @@ class AllInfo extends Component {
                 Status: <b>{status}</b><br />
                 Qualifications: <b>{qualifications}</b><br />
                 Interest: <b>{interest}</b><br />
+                Last Communication: <b>{LastComm}</b><br />
+                Last Communication Date:<b>{LastCommDate}</b><br />
+                Extra notes=<b>{notes}</b><br />
                 <button className="Back" onClick={this.back}>
-                    « Back
+                    « Make Changes
+                </button>
+                <button className="Next" onClick={this.submit}>
+                Submit
                 </button>
             </>
         );
