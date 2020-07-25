@@ -22,7 +22,7 @@ class JobDetails_2 extends Component {
     }
 
     render(){
-        const { status, qualifications, interest, handleChange } = this.props;
+        const { status, interest, jobAdURL, handleChange } = this.props;
         const defaultOption = options[0];
         return(
             <>
@@ -30,19 +30,19 @@ class JobDetails_2 extends Component {
                 <label>
                     <input 
                         type="text"
-                        name="status"
-                        value={status}
-                        onChange={handleChange('status')}
-                        placeholder="status"
+                        name="jobAdURL"
+                        value={jobAdURL}
+                        onChange={handleChange('jobAdURL')}
+                        placeholder="Link to job advertisement"
                     />
                 </label>
                 <label>
                     <input 
                         type="text"
-                        name="qualifications"
-                        value={qualifications}
-                        onChange={handleChange('qualifications')}
-                        placeholder="qualifications"
+                        name="status"
+                        value={status}
+                        onChange={handleChange('status')}
+                        placeholder="status"
                     />
                 </label>
                 <label>

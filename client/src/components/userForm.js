@@ -12,10 +12,9 @@ export class StepForm extends Component {
         jobCompany: '',
         jobLocation: '',
         jobAdURL:'',
-        
+
         // step 2
         status: '',
-        qualifications: '',
         interest: '',
 
         //step 3
@@ -45,7 +44,7 @@ export class StepForm extends Component {
     }
 
     showStep = () => {
-        const { step, status, qualifications,interest, jobTitle, jobCompany, jobLocation, jobAdURL, LastComm, LastCommDate, pocPhone, notes } = this.state;
+        const { step, status,interest, jobTitle, jobCompany, jobLocation, jobAdURL, LastComm, LastCommDate, pocPhone, notes } = this.state;
 
         if(step === 1)
             return (<JobDetails_1 
@@ -56,15 +55,15 @@ export class StepForm extends Component {
                 jobTitle={jobTitle} 
                 jobCompany={jobCompany}
                 jobLocation={jobLocation}
-                jobAdURL={jobAdURL}
+                
             />);
         if (step === 2)
             return (<JobDetails_2
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 handleChange={this.handleChange}
+                jobAdURL={jobAdURL}
                 status={status}
-                qualifications={qualifications}
                 interest={interest}
 
             />);
@@ -84,7 +83,6 @@ export class StepForm extends Component {
                 // firstName={firstName} 
                 // lastName={lastName}
                 status={status} 
-                qualifications={qualifications}
                 interest={interest}
                 jobTitle={jobTitle} 
                 jobCompany={jobCompany}
