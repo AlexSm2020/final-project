@@ -25,6 +25,9 @@ const SavedSearchesSchema = new Schema({
         type: String
     }
 
+},
+{
+    timestamps: true
 });
 
 const SavedSearches = mongoose.model("SavedSearches", SavedSearchesSchema);

@@ -32,7 +32,7 @@ const ApplicationSchema = new Schema({
     // This would be the level of interest that the user has in this particular job application. We will then give the users the ability to filter their applications by this input. 
     // Manually entered by user
     interest: {
-        type: Number
+        type: String
     },
     // Point of contact at company
     poc: {

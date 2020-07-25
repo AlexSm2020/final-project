@@ -1,5 +1,6 @@
   
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 class AllInfo extends Component {
     back = e => {
@@ -11,6 +12,29 @@ class AllInfo extends Component {
         e.preventDefault();
         // PROCESS FORM //
         console.log(data)
+
+        const appPayload = {
+            title: data.jobTitle,
+            location: data.jobLocation,
+            status: data.status,
+            company: data.jobCompany,
+            jobAdURL: data.jobAdURL,
+            interest: data.interest,
+            poc: data.poc,
+            pocEmail: data.pocEmail,
+            pocPhone: data.pocPhone,
+            lastComm: data.lastComm,
+            lastCommDate: data.lastCommDate,
+            notes: data.notes    
+        }
+
+        Axios.post("/user/startApplication", appPayload)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
 
     }
 
