@@ -4,5 +4,6 @@ module.exports = {
     User: require("./user"),
     Application: require("./application"),
     SavedJob: require("./savedJob"),
-    Task: require("./task")
+    Task: require("./task"),
+    SavedSearches: require("./savedSearches")
 }
