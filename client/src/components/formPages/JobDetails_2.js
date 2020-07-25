@@ -1,4 +1,14 @@
 import React, { Component } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+ 
+const options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+    { value: 'three', label: 'Three' },
+    { value: 'four', label: 'Four' }
+
+];
 
 class JobDetails_2 extends Component {
     continue = e => {
@@ -13,6 +23,7 @@ class JobDetails_2 extends Component {
 
     render(){
         const { status, qualifications, interest, handleChange } = this.props;
+        const defaultOption = options[0];
         return(
             <>
                 <h2>Enter your job information:</h2>
@@ -43,6 +54,16 @@ class JobDetails_2 extends Component {
                         placeholder="interest"
                     />
                 </label>
+                <label>
+                    <Dropdown className='myClassName'
+                        options={options} 
+                        name="interest"
+                        value={interest} 
+                        onChange={handleChange('interest')} 
+                        placeholder="Select an option" 
+                    />
+                </label>
+            
                 <button className="Back" onClick={this.back}>
                     « Back
                 </button>
