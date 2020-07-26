@@ -170,3 +170,28 @@ html {
 	width: 250%;
 }
 
+.contactTitle {
+	text-align: center;
+}
+
+.contactBody, .notesTitle, .lastCommTitle, .interestTitle, .interestText {
+	text-align: center;
+}
+
+.contactBtn, .notesBtn{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.jobAdBtn{
+	float: right;
+	margin-right: 30%;
+}
+.editInterestBtn {
+	float: left;
+	margin-left: 30%;
+}
+
+
+
