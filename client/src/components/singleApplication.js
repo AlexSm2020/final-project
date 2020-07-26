@@ -36,37 +36,69 @@ render () {
             </Jumbotron>
             <Container fluid>
                 <Row xs="2">
-                    {/* Point of Contact Info and Last Communication Section */}
-                    <Col xs="7">Column 1</Col>
+                    {/* Notes Card */}
+                    <Col xs="7">
+                        <h4 className="notesTitle">Notes</h4>
+                        <Card className="notesCard">
+                            <CardBody>
+                                <CardText>Enter Notes Here</CardText>
+                                <Button className="notesBtn">Edit Notes</Button>
+                            </CardBody>
+                        </Card>
+
+                    </Col>
                     {/* Interest column and Notes Column */}
                     <Col xs="5">
-                        <Row style={{marginRight:"100px"}}>
-                            <Col xs="6">
-                                <Button>View Job Ad</Button>
-                            </Col>
-                            <Col xs="6">
-                                <Card>
+                        <Row>
+                            <Col xs="12">
+                                <h4 className="interestTitle">Interest and Job Ad</h4>
+                                <Card className="interestCard">
                                     <CardBody>
-                                        <CardTitle>Interest</CardTitle>
-                                        <CardText>High</CardText>
-                                        <Button>Edit Interest</Button>
-                                    </CardBody>
+                                        <CardText className="interestText">High</CardText>
+                                            <Button className="editInterestBtn">Edit Interest</Button>
+                                            <Button className="jobAdBtn">View Job Ad</Button>
+                                        </CardBody>
                                 </Card>
                             </Col>
                         </Row>
-                        <Row style={{marginRight: "100px"}}>
+                        <Row>
                             <Col xs="12">
+                                <h4 className="contactTitle">Contact and Communications</h4>
                                 <Card>
-                                    <CardBody>
-                                        <CardTitle>Card title</CardTitle>
-                                        <CardSubtitle>Card subtitle</CardSubtitle>
-                                        <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-                                        <Button>Button</Button>
+                                    <CardBody class="contactBody">
+                                        <CardText>Point of Contact: </CardText>
+                                        <CardText>Email Address: </CardText>
+                                        <CardText>Phone Number: </CardText>
+                                        <Button className="contactBtn">Edit Info</Button>
                                     </CardBody>
                                 </Card>
                             </Col>
                         </Row>
                     </Col>
+                </Row>
+                <Row xs="2">
+                    <Col xs="7">
+                        <h4 className="taskTitle">Tasks</h4>
+                        <Card>
+                            <CardBody class="taskBody">
+                                <CardText>Title: </CardText>
+                                <CardText>Description: </CardText>
+                                <Button className="editTaskBtn">Edit Task</Button>
+                                <Button className="addTaskBtn">Add Task</Button>
+                            </CardBody>
+                        </Card>
+
+                    </Col>
+                    <Col xs="5">
+                        <h4 className="lastCommTitle">Last Communication</h4>
+                        <Card>
+                            <CardBody class="lastCommBody">
+                                <CardText>Type: </CardText>
+                                <CardText>Last Communication Date: </CardText>
+                                <Button className="lastCommBtn">Edit Last Comm</Button>
+                            </CardBody>
+                        </Card>
+                        </Col>
                 </Row>
             </Container>
         </div>

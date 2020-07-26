@@ -101,9 +101,13 @@ router.post("/startApplication", async function (req, res) {
             company: req.body.company,
             jobAdURL: req.body.jobAdURL,
             interest: req.body.interest,
+            poc: req.body.poc,
+            pocEmail: req.body.pocEmail,
+            pocPhone: req.body.pocPhone,
             lastComm: req.body.lastComm,
             lastCommDate: req.body.lastCommDate,
-            notes: req.body.notes
+            notes: req.body.notes,
+
         }
 
     // Create and store application in database using application object above
@@ -159,14 +163,21 @@ router.get("/applications", function (req, res) {
 // Updating Task
 
 // Saving and getting searches
-router.post("/savesearch", function(req, res) {
-    db.SavedSearches.create({
+router.post("/savesearch", async function(req, res) {
+ try {const savedSearch =  await  db.SavedSearches.create({
         name: req.body.name,
         query: req.body.query,
         location: req.body.location,
         radius: req.body.radius,
         jobType: req.body.jobType
     })
+
+    await db.User.findByIdAndUpdate(req.user._id, { $push: {savedSearches: savedSearch._id }}, {new: true})
+
+    res.status("200")
+} catch (error) {
+    if(error) throw error
+    }
 })
 
 router.get("/savesearch", function (req, res) {
