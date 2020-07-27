@@ -153,7 +153,7 @@ router.post("/startApplication", async function (req, res) {
 
 router.get("/applications", function (req, res) {
     db.User.findById({_id: req.user._id})
-        .populate({path: "applications", options: { sort: [["createdAt", 'desc']]}})
+        .populate({path: "applications", options: { sort: {"createdAt": -1}}})
         .then(dbApplications => {
             res.json(dbApplications)
         })
