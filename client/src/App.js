@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
+import Conditional from "./components/conditional"
 import Main from './components/main';
 import axios from "axios"
 import {Link} from 'react-router-dom';
@@ -56,32 +57,50 @@ logout = () => {
       <div className="demo-big-content">
     <Layout>
         <Header className="header-color" title={<Link style={{textDecoration: 'none', color: 'white'}} to="/">JobSearchApp</Link>} scroll>
+          <Conditional if={this.state.loggedIn===true}>
             <Navigation>
-                <Link to="/register">Register Today</Link>
-                <Link to="/about">About Us</Link>
-                <Link to="/login">Log In</Link>
-                <Link to="/contact">Contact Us</Link>
-                <Link to="/search">Search</Link>
-                <Link to="/userForm">My form</Link>
-                <Link to ="/applications">My Applications</Link>
-                <Link to="/singleApplication">Single Application</Link>
-                <Link to="/login" onClick={this.logout}>Logout</Link>
+              <Link to="/search">Search</Link>
+              <Link to="/userForm">My form</Link>
+              <Link to="/applications">My Applications</Link>
+              <Link to="/singleApplication">Single Application</Link>
+              <Link to="/about">About Us</Link>
+              <Link to="/contact">Contact</Link>
+              <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
+          </Conditional>
+          <Conditional if={this.state.loggedIn===false}>
+              <Navigation>
+                <Link to="/about">About Us</Link>
+                <Link to="/register">Register Today</Link>
+                <Link to="/login">Log In</Link>
+                <Link to="/about">Contact</Link>
+              </Navigation>
+          </Conditional>
         </Header>
         <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">JobSearchApp</Link>}>
+          <Conditional if={this.state.loggedIn===true}>
             <Navigation>
-              <Link to="/register">Register Today</Link>
-              <Link to="/about">About Us</Link>
-              <Link to="/login">Log In</Link>
-              <Link to="/contact">Contact Us</Link>
-              <Link to="/search">Search</Link>
-              <Link to="/applications">My Applications</Link>
-              <Link to ="/singleApplication">Single Application</Link>
+                <Link to="/search">Search</Link>
+                <Link to="/userForm">My form</Link>
+                <Link to="/applications">My Applications</Link>
+                <Link to="/singleApplication">Single Application</Link>
+                <Link to="/about">About Us</Link>
+                <Link to="/contact">Contact</Link>
+                <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
+          </Conditional>
+            <Conditional if={this.state.loggedIn === false}>
+              <Navigation>
+                <Link to="/about">About Us</Link>
+                <Link to="/register">Register Today</Link>
+                <Link to="/login">Log In</Link>
+                <Link to="/about">Contact</Link>
+              </Navigation>
+            </Conditional>
         </Drawer>
         <Content>
             <div className="page-content" />
-            <Main redirect={this.state.redirect} redirectTo={this.state.redirectTo} component={this.state.component} updateUser={this.updateUser} />
+            <Main />
         </Content>
     </Layout>
 </div>
