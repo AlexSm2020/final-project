@@ -10,8 +10,14 @@ class SingleApplication extends Component {
     constructor (props) {
         super (props)
         this.state = {
-            applicationData: props.applicationData
+            appData: {}
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            appData: this.props.location.state.application
+        })
     }
 
 render () {
@@ -20,10 +26,10 @@ render () {
             <Jumbotron fluid>
                 <Container fluid>
                     <div>
-                        <h2 className="display-3">Application Title 
+                        <h2 className="display-3"> {this.state.appData.title}
                             <div className="companyLocationDiv">
-                                <small className="companyName">Google</small>
-                                <small className="companyLocation">Mountain View, California</small>
+                                <small className="companyName">{this.state.appData.company}</small>
+                                <small className="companyLocation">{this.state.appData.location}</small>
                             </div>
                         </h2>
                         {/* <p>Company: </p>
@@ -41,7 +47,7 @@ render () {
                         <h4 className="notesTitle">Notes</h4>
                         <Card className="notesCard">
                             <CardBody>
-                                <CardText>Enter Notes Here</CardText>
+                                <CardText>{this.state.appData.notes}</CardText>
                                 <Button className="notesBtn">Edit Notes</Button>
                             </CardBody>
                         </Card>
@@ -54,7 +60,7 @@ render () {
                                 <h4 className="interestTitle">Interest and Job Ad</h4>
                                 <Card className="interestCard">
                                     <CardBody>
-                                        <CardText className="interestText">High</CardText>
+                                        <CardText className="interestText">{this.state.appData.interest}</CardText>
                                             <Button className="editInterestBtn">Edit Interest</Button>
                                             <Button className="jobAdBtn">View Job Ad</Button>
                                         </CardBody>
@@ -66,9 +72,9 @@ render () {
                                 <h4 className="contactTitle">Contact and Communications</h4>
                                 <Card>
                                     <CardBody class="contactBody">
-                                        <CardText>Point of Contact: </CardText>
-                                        <CardText>Email Address: </CardText>
-                                        <CardText>Phone Number: </CardText>
+                                        <CardText>Point of Contact: {this.state.appData.poc} </CardText>
+                                        <CardText>Email Address: {this.state.appData.pocEmail} </CardText>
+                                        <CardText>Phone Number: {this.state.appData.pocPhone} </CardText>
                                         <Button className="contactBtn">Edit Info</Button>
                                     </CardBody>
                                 </Card>
