@@ -35,34 +35,31 @@ class JobDetails_2 extends Component {
                         onChange={handleChange('jobAdURL')}
                         placeholder="Link to job advertisement"
                     />
-                </label>
-                <label>
-                    <input 
-                        type="text"
-                        name="status"
-                        value={status}
-                        onChange={handleChange('status')}
-                        placeholder="status"
-                    />
-                </label>
-                <label>
-                    <input 
-                        type="text"
-                        name="interest"
-                        value={interest}
-                        onChange={handleChange('interest')}
-                        placeholder="interest"
-                    />
-                </label>
-                <label>
-                    <Dropdown className='myClassName'
-                        options={options} 
-                        name="interest"
-                        value={interest} 
-                        onChange={handleChange('interest')} 
-                        placeholder="Select an option" 
-                    />
-                </label>
+                </label>   
+                <div className="form-group">
+                    <label>What is the current status of this Job?</label>
+                    <select className="form-control" name="status" defaultValue="" value={status} onChange={handleChange('status')}>
+
+                        <option>Pre-application</option>
+                        <option>New</option>
+                        <option>Phone Screen</option>
+                        <option>interview</option>
+                        <option>Coding Assessment</option>
+                        <option>Offer</option>
+                        <option>Accepted</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>What is your level of interest to this Job?</label>
+                    <select className="form-control" name="interest" defaultValue="" value={interest} onChange={handleChange('interest')}>
+
+                        <option>Highly Interested</option>
+                        <option>Interested</option>
+                        <option>Neutral</option>
+                        <option>Not Interested</option>
+                    </select>
+                </div>
             
                 <button className="Back" onClick={this.back}>
                     « Back
