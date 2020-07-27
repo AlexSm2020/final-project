@@ -22,20 +22,11 @@ class JobDetails_2 extends Component {
     }
 
     render(){
-        const { status, interest, jobAdURL, handleChange } = this.props;
+        const { status, interest, LastComm, LastCommDate, handleChange } = this.props;
         const defaultOption = options[0];
         return(
             <>
                 <h2>Enter your job information:</h2>
-                <label>
-                    <input 
-                        type="text"
-                        name="jobAdURL"
-                        value={jobAdURL}
-                        onChange={handleChange('jobAdURL')}
-                        placeholder="Link to job advertisement"
-                    />
-                </label>   
                 <div className="form-group">
                     <label>What is the current status of this Job?</label>
                     <select className="form-control" name="status" defaultValue="" value={status} onChange={handleChange('status')}>
@@ -60,6 +51,24 @@ class JobDetails_2 extends Component {
                         <option>Not Interested</option>
                     </select>
                 </div>
+                <label>
+                    <input 
+                        type="text"
+                        name="LastComm"
+                        value={LastComm}
+                        onChange={handleChange('LastComm')}
+                        placeholder="Last Communication"
+                    />
+                </label>
+                <label>
+                    <input 
+                        type="text"
+                        name="LastCommDate"
+                        value={LastCommDate}
+                        onChange={handleChange('LastCommDate')}
+                        placeholder="Last Communication Date"
+                    />
+                </label>
             
                 <button className="Back" onClick={this.back}>
                     « Back
