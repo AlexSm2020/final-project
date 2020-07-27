@@ -174,14 +174,18 @@ html {
 	text-align: center;
 }
 
-.contactBody, .notesTitle, .lastCommTitle, .interestTitle, .interestText {
+.contactBody, .notesTitle, .lastCommTitle, .interestTitle, .interestText, .taskTitle {
 	text-align: center;
 }
 
-.contactBtn, .notesBtn{
+.contactBtn, .notesBtn, .addTask, .lastCommBtn, .editTaskBtn {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.colMargin {
+	margin-top: 3%;
 }
 
 .jobAdBtn{
@@ -191,6 +195,10 @@ html {
 .editInterestBtn {
 	float: left;
 	margin-left: 30%;
+}
+
+.taskCard {
+	margin-top: 3%;
 }
 
 

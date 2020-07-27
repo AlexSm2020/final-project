@@ -44,19 +44,44 @@ render () {
                 <Row xs="2">
                     {/* Notes Card */}
                     <Col xs="7">
-                        <h4 className="notesTitle">Notes</h4>
-                        <Card className="notesCard">
-                            <CardBody>
-                                <CardText>{this.state.appData.notes}</CardText>
-                                <Button className="notesBtn">Edit Notes</Button>
-                            </CardBody>
-                        </Card>
+                        <Row>
+                            <Col xs="1"></Col>
+                            <Col xs="10">
+                                <h4 className="notesTitle">Notes</h4>
+                                <Card className="notesCard">
+                                    <CardBody>
+                                        <CardText>{this.state.appData.notes}</CardText>
+                                        <Button className="notesBtn">Edit Notes</Button>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                            <Col xs="1"></Col>
+                        </Row>
+                        <Row>
+                            <Col xs="1"></Col>
+                            <Col className="colMargin" xs="10">
+                                <div>
+                                    <h4 className="taskTitle">Tasks</h4>
+                                    <Button className="addTask">Add Task</Button>
+                                </div>
+                                <Card className="taskCard">
+                                    <CardBody class="taskBody">
+                                        <CardText>Title: </CardText>
+                                        <CardText>Description: </CardText>
+                                        <Button className="editTaskBtn">Edit Task</Button>
+                                    </CardBody>
+                                </Card>
+
+                            </Col>
+                            <Col xs="1"></Col>
+
+                        </Row>
 
                     </Col>
                     {/* Interest column and Notes Column */}
                     <Col xs="5">
                         <Row>
-                            <Col xs="12">
+                            <Col xs="11">
                                 <h4 className="interestTitle">Interest and Job Ad</h4>
                                 <Card className="interestCard">
                                     <CardBody>
@@ -66,11 +91,12 @@ render () {
                                         </CardBody>
                                 </Card>
                             </Col>
+                            <Col xs="1"></Col>
                         </Row>
                         <Row>
-                            <Col xs="12">
-                                <h4 className="contactTitle">Contact and Communications</h4>
-                                <Card>
+                            <Col className="colMargin" xs="11">
+                                <h4 className="contactTitle">Contact</h4>
+                                <Card className="contactCard">
                                     <CardBody class="contactBody">
                                         <CardText>Point of Contact: {this.state.appData.poc} </CardText>
                                         <CardText>Email Address: {this.state.appData.pocEmail} </CardText>
@@ -79,32 +105,29 @@ render () {
                                     </CardBody>
                                 </Card>
                             </Col>
+                            <Col xs="1"></Col>
                         </Row>
                     </Col>
                 </Row>
                 <Row xs="2">
                     <Col xs="7">
-                        <h4 className="taskTitle">Tasks</h4>
-                        <Card>
-                            <CardBody class="taskBody">
-                                <CardText>Title: </CardText>
-                                <CardText>Description: </CardText>
-                                <Button className="editTaskBtn">Edit Task</Button>
-                                <Button className="addTaskBtn">Add Task</Button>
-                            </CardBody>
-                        </Card>
 
                     </Col>
                     <Col xs="5">
-                        <h4 className="lastCommTitle">Last Communication</h4>
-                        <Card>
-                            <CardBody class="lastCommBody">
-                                <CardText>Type: </CardText>
-                                <CardText>Last Communication Date: </CardText>
-                                <Button className="lastCommBtn">Edit Last Comm</Button>
-                            </CardBody>
-                        </Card>
-                        </Col>
+                        <Row>
+                            <Col className="colMargin" xs="11">
+                            <h4 className="lastCommTitle">Last Communication</h4>
+                                <Card>
+                                    <CardBody class="lastCommBody">
+                                        <CardText>Type: </CardText>
+                                        <CardText>Last Communication Date: </CardText>
+                                        <Button className="lastCommBtn">Edit Last Comm</Button>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                            <Col xs="1"></Col>
+                        </Row>
+                    </Col>
                 </Row>
             </Container>
         </div>
