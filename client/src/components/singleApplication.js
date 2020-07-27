@@ -19,7 +19,7 @@ class SingleApplication extends Component {
             appData: this.props.location.state.application
         })
     }
-
+    
 render () {
     return (
         <div>
