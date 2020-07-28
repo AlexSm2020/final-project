@@ -73,7 +73,7 @@ router.get("/logout", function (req, res) {
 // Takes query parameters from search form and generates URL string for API call
 router.post('/indeed', function (req, res) {
 
-    const baseURL = "https://api.indeed.com/ads/apisearch?v=2&userip=1.2.3.4&format=json&limit=25";
+    const baseURL = "https://api.indeed.com/ads/apisearch?v=2&userip=1.2.3.4&format=json&limit=25&highlight=0";
     const publisherId = "&publisher=1397045879077994";
     console.log(req.body)
     let query = `&q=${(req.body.query).toLowerCase().split(" ").join("+")}`;
