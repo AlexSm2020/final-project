@@ -14,23 +14,15 @@ class Applications extends Component {
         try {
             const applications = await axios.get("/user/applications")
 
-            console.log(applications)
-
+            this.setState({
+                applications: applications.data.applications
+            })
         }
         catch (error) {
             if (error) {
                 console.log(error)
             }
-        } 
-        // axios.get("/user/applications")
-        //     .then((response, error) => {
-        //         if (error) {
-        //             console.log(error.message)
-        //         }
-        //         console.log(response)
-        //         this.setState({applications: response.data.applications})
-
-        //     });
+        }
     }
 
     render () {

@@ -201,5 +201,12 @@ html {
 	margin-top: 3%;
 }
 
+.statusBtn {
+	background:blue;
+	padding: 16;
+	text-align: center;
+	margin-top: 3%;
+	margin-left: 7%;
+}
 
 

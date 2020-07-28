@@ -66,7 +66,6 @@ logout = () => {
               <Link to="/search">Search</Link>
               <Link to="/userForm">My form</Link>
               <Link to="/applications">My Applications</Link>
-              <Link to="/singleApplication">Single Application</Link>
               <Link to="/about">About Us</Link>
               <Link to="/contact">Contact</Link>
               <Link to="/login" onClick={this.logout}>Logout</Link>
@@ -87,7 +86,6 @@ logout = () => {
                 <Link to="/search">Search</Link>
                 <Link to="/userForm">My form</Link>
                 <Link to="/applications">My Applications</Link>
-                <Link to="/singleApplication">Single Application</Link>
                 <Link to="/about">About Us</Link>
                 <Link to="/contact">Contact</Link>
                 <Link to="/login" onClick={this.logout}>Logout</Link>
