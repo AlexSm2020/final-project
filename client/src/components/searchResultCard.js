@@ -1,21 +1,32 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+import { Button } from 'reactstrap';
+import SearchModal from './SearchModal';
 
 function SearchResultCard(props) {
-        return (
-            <div className="card">
-                <h2>{props.jobtitle}</h2>
-                <button onClick={props.onClick}>
-                 Save Application  <FontAwesomeIcon icon={faSave} />
-                </button>
-                <h3>{props.company}</h3>
-                <h4>{props.formattedLocationFull}</h4>
-                <p>{props.snippet}</p>
-                <p>Posted: {props.date}</p>
-                <a href={props.url} target="blank">Apply</a>
+    return (
+        <div className="job-card card">
+            <h4>{props.jobtitle}</h4>
+            <h5>{props.company}</h5>
+            <h6>{props.formattedLocationFull}</h6>
+            <p>{props.snippet}</p>
+            <p>Posted: {props.date}</p>
+            <div className="job-card-buttons">
+                <SearchModal
+                    modalId={"track-modal"}
+                    modalButtonText={"Track Application"}
+                    modalHeader={"Would you like to start tracking this application?"}
+                    modalConfirm={'Yes'}
+                    jobtitle={props.jobtitle}
+                    company={props.company}
+                    formattedLocationFull={props.formattedLocationFull}
+                    url={props.url}
+                    application={props.application}
+                />
+                <Link to={{ pathname: props.url }} target="_blank"><Button>Apply</Button></Link>
             </div>
-        );
-    }
+        </div>
+    );
+}
 
 export default SearchResultCard;
