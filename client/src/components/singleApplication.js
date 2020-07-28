@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Jumbotron, Container, Row, Col, Card, Button, CardImg, CardTitle, CardText, CardColumns,
-    CardSubtitle, CardBody } from 'reactstrap';
+    Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
 import Stepper from 'react-stepper-horizontal'
 
 
@@ -10,35 +9,98 @@ class SingleApplication extends Component {
     constructor (props) {
         super (props)
         this.state = {
-            appData: {}
+            appData: {},
+            steps: [{
+                title: 'Pre-Application'
+            }, {
+                title: 'Submitted Application'
+            }, {
+                title: 'Interview'
+            }, {
+                title: 'Assessment'
+            }, {
+                title: 'Offered'
+            }, {
+                title: 'Accepted Offer'
+            }],
+            currentStep: 0,
+        };
+        this.onClickNext = this.onClickNext.bind(this)
+        this.onClickBack = this.onClickBack.bind(this)
+    }
+
+    onClickNext() {
+        const { appData , steps, currentStep } = this.state;
+        if (currentStep < 5) {
+            this.setState({
+                currentStep: currentStep + 1
+            })
+        }
+        
+    }
+    
+    onClickBack() {
+        const { appData, steps, currentStep } = this.state;
+        if (currentStep > 0) {
+            this.setState({
+                currentStep: currentStep - 1
+            })
         }
     }
 
     componentDidMount() {
         if (this.props.location.state.application) {
+            var statusNum;
+            switch (this.props.location.state.application.status) {
+                case "Pre-Application":
+                    statusNum = 0
+                    break;
+                case "Submitted Application":
+                    statusNum = 1
+                    break;
+                case "Interview":
+                    statusNum = 2
+                    break;
+                case "Assessment":
+                    statusNum = 3
+                    break;
+                case "Offered":
+                    statusNum = 4
+                    break;
+                case "Accepted Offer":
+                    statusNum = 5
+                    break;
+                default:
+                    statusNum = 0
+            }
             this.setState({
-                appData: this.props.location.state.application
+                appData: this.props.location.state.application,
+                currentStep: statusNum
             })
         }
     }
     
 render () {
+    const { appData, steps, currentStep } = this.state;
+
     return (
         <div>
             <Jumbotron fluid>
                 <Container fluid>
                     <div>
-                        <h2 className="display-3"> {this.state.appData.title}
+                        <h2 className="display-3"> {appData.title}
                             <div className="companyLocationDiv">
-                                <small className="companyName">{this.state.appData.company}</small>
-                                <small className="companyLocation">{this.state.appData.location}</small>
+                                <small className="companyName">{appData.company}</small>
+                                <small className="companyLocation">{appData.location}</small>
                             </div>
                         </h2>
                         {/* <p>Company: </p>
                         <p>Location: </p>    */}
                     </div>
                     <div>
-                        <Stepper steps={[{ title: 'Submitted Application' }, { title: 'Interview' }, { title: 'Assessment' }, { title: 'Offered' }, { title: 'Accepted Offer' }]} activeStep={2} />
+                        <Stepper steps={ steps } activeStep = { currentStep }  />
+                        <Button className="statusBtn" onClick={this.onClickBack}>Move Back </Button>
+                        <Button className="statusBtn" onClick={ this.onClickNext }>Move Forward </Button>
                     </div>
                 </Container>
             </Jumbotron>
@@ -52,7 +114,7 @@ render () {
                                 <h4 className="notesTitle">Notes</h4>
                                 <Card className="notesCard">
                                     <CardBody>
-                                        <CardText>{this.state.appData.notes}</CardText>
+                                        <CardText>{appData.notes}</CardText>
                                         <Button className="notesBtn">Edit Notes</Button>
                                     </CardBody>
                                 </Card>
