@@ -25,12 +25,16 @@ componentDidMount(){
       if (error) {
         console.log(error.message)
       }
-      this.setState({
-        loggedIn: true,
-        username: response.data.username,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName
-      })
+      else if (response.data==="no user logged in") {
+        this.setState({
+          loggedIn: false
+        })
+      }
+      else {
+        this.setState({
+          loggedIn: true
+        })
+      }
     })
 }
 

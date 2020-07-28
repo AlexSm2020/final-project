@@ -10,16 +10,27 @@ class Applications extends Component {
         applications: []
     }
     // Retrieving applications for user upon loading this component. 
-    componentDidMount() {
-        axios.get("/user/applications")
-            .then((response, error) => {
-                if (error) {
-                    console.log(error.message)
-                }
-                console.log(response)
-                this.setState({applications: response.data.applications})
+    async componentDidMount() {
+        try {
+            const applications = await axios.get("/user/applications")
 
-            });
+            console.log(applications)
+
+        }
+        catch (error) {
+            if (error) {
+                console.log(error)
+            }
+        } 
+        // axios.get("/user/applications")
+        //     .then((response, error) => {
+        //         if (error) {
+        //             console.log(error.message)
+        //         }
+        //         console.log(response)
+        //         this.setState({applications: response.data.applications})
+
+        //     });
     }
 
     render () {

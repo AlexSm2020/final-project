@@ -58,6 +58,9 @@ router.get("/", function (req, res){
     if (req.user) {
         res.json(req.user)
     }
+    else {
+        res.json("no user logged in")
+    }
 })
 
 // Logout route - clears passport session and logs the user out

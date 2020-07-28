@@ -15,9 +15,11 @@ class SingleApplication extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            appData: this.props.location.state.application
-        })
+        if (this.props.location.state.application) {
+            this.setState({
+                appData: this.props.location.state.application
+            })
+        }
     }
     
 render () {

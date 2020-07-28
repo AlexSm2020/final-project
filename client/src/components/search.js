@@ -19,8 +19,15 @@ class Search extends React.Component {
         this.baseState = this.state
     }
 
-    componentDidMount() {
-        this.getSavedSearches();
+    async componentDidMount() {
+        try {
+            await this.getSavedSearches();
+        }
+        catch (error) {
+            if (error) {
+                console.log(error)
+            }
+        }
     }
 
     handleChange = ({ target }) => {
