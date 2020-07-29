@@ -7,12 +7,45 @@ const ModalExample = (props) => {
         buttonLabel,
         className,
         modalTitle,
-        modalType
+        modalType,
+        dropDownValue,
+        dropDownOpen
     } = props;
 
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
+
+    const submit = () => {
+        switch (modalType){
+            case "editInterest":
+                console.log("editInterest")
+                setModal(!modal)
+                break;
+            case "editNotes":
+                console.log("editNotes")
+                setModal(!modal)
+                break;
+            case "editTask":
+                console.log("editTask")
+                setModal(!modal)
+                break;
+            case "editComm":
+                console.log("editComm")
+                setModal(!modal)
+                break;
+            case "editContact":
+                console.log("editContact")
+                setModal(!modal)
+                break;
+            case "addTask":
+                console.log("addTask")
+                setModal(!modal)
+                break;
+            default:
+                setModal(!modal)
+        }
+    }
 
     return (
         <div>
@@ -20,10 +53,10 @@ const ModalExample = (props) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
-                    <ModalBodyContent modalType={modalType} />   
+                    <ModalBodyContent dropDownOpen={dropDownOpen} toggleDropDown={props.toggleDropDown} changeDropDownValue={props.changeDropDownValue} modalType={modalType} />   
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                    <Button color="primary" onClick={submit}>Submit</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
