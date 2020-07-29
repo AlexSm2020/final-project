@@ -1,18 +1,66 @@
 import React, { Component } from 'react';
+import "react-step-progress-bar/styles.css";
+import { ProgressBar, Step} from "react-step-progress-bar";
+import './form.css';
 
-class JobDetails_1 extends Component{
+class JobDetails_1 extends Component {
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
     }
 
-    render(){
+    render() {
         const { jobTitle, jobCompany, jobLocation, jobAdURL, handleChange } = this.props;
-        return(
-            <>
-                <h2>Enter your job information:</h2>
+        return (
+            <div className="application-form">
+
+
+
+
+                <ProgressBar percent={25}>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                </ProgressBar>
+
+
+
+                <h3>Enter your job information:</h3>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         name="jobTitle"
                         value={jobTitle}
@@ -21,7 +69,7 @@ class JobDetails_1 extends Component{
                     />
                 </label>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         name="jobCompany"
                         value={jobCompany}
@@ -30,7 +78,7 @@ class JobDetails_1 extends Component{
                     />
                 </label>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         name="jobCompany"
                         value={jobLocation}
@@ -39,19 +87,19 @@ class JobDetails_1 extends Component{
                     />
                 </label>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         name="jobAdURL"
                         value={jobAdURL}
                         onChange={handleChange('jobAdURL')}
                         placeholder="Link to job advertisement"
                     />
-                </label>   
+                </label>
 
                 <button className="Next" onClick={this.continue}>
                     Next »
                 </button>
-            </>
+            </div>
         );
     }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
 import Stepper from 'react-stepper-horizontal'
+import Modal from "./modal"
 
 
 class SingleApplication extends Component {
@@ -115,7 +116,7 @@ render () {
                                 <Card className="notesCard">
                                     <CardBody>
                                         <CardText>{appData.notes}</CardText>
-                                        <Button className="notesBtn">Edit Notes</Button>
+                                        <Modal modalType="editNotes" className="notesBtn" buttonLabel="Edit Notes" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -126,13 +127,13 @@ render () {
                             <Col className="colMargin" xs="10">
                                 <div>
                                     <h4 className="taskTitle">Tasks</h4>
-                                    <Button className="addTask">Add Task</Button>
+                                    <Modal modalType="addTask" className="addTask" buttonLabel="Add Task" />
                                 </div>
                                 <Card className="taskCard">
                                     <CardBody class="taskBody">
                                         <CardText>Title: </CardText>
                                         <CardText>Description: </CardText>
-                                        <Button className="editTaskBtn">Edit Task</Button>
+                                        <Modal modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
                                     </CardBody>
                                 </Card>
 
@@ -150,9 +151,9 @@ render () {
                                 <Card className="interestCard">
                                     <CardBody>
                                         <CardText className="interestText">{this.state.appData.interest}</CardText>
-                                            <Button className="editInterestBtn">Edit Interest</Button>
-                                            <Button className="jobAdBtn">View Job Ad</Button>
-                                        </CardBody>
+                                        <Modal modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
+                                        <Button className="jobAdBtn">View Job Ad</Button>
+                                    </CardBody>
                                 </Card>
                             </Col>
                             <Col xs="1"></Col>
@@ -165,7 +166,7 @@ render () {
                                         <CardText>Point of Contact: {this.state.appData.poc} </CardText>
                                         <CardText>Email Address: {this.state.appData.pocEmail} </CardText>
                                         <CardText>Phone Number: {this.state.appData.pocPhone} </CardText>
-                                        <Button className="contactBtn">Edit Info</Button>
+                                        <Modal modalType="editContact" className="contactBtn" buttonLabel="Edit Info" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -185,7 +186,7 @@ render () {
                                     <CardBody class="lastCommBody">
                                         <CardText>Type: </CardText>
                                         <CardText>Last Communication Date: </CardText>
-                                        <Button className="lastCommBtn">Edit Last Comm</Button>
+                                        <Modal modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
                                     </CardBody>
                                 </Card>
                             </Col>
