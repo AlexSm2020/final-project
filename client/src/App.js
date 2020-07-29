@@ -76,7 +76,7 @@ logout = () => {
                 <Link to="/about">About Us</Link>
                 <Link to="/register">Register Today</Link>
                 <Link to="/login">Log In</Link>
-                <Link to="/about">Contact</Link>
+                <Link to="/contact">Contact</Link>
               </Navigation>
           </Conditional>
         </Header>

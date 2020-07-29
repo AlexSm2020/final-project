@@ -52,12 +52,12 @@ p {
     margin: 0 0 10px;
     color: #555;
     background-color: #fff;
-    border-color: #ccc;
-    border-width: 1px;
+    border-color: #2980b9;
+    border-width: 2px;
     border-style: solid;
-    border-radius: 0;
-    width: 100%;
-    max-width: 300px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
     font-size: 14px;
     padding: 6px 10px;
     box-sizing: border-box;
