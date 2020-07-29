@@ -209,4 +209,75 @@ html {
 	margin-left: 7%;
 }
 
+/* CSS for Search Page */
+#search-container {
+    padding: 50px;
+}
+#search-column {
+    padding-top: 0px;
+}
+#search-column h3 {
+    margin-top: 0px;
+}
+#search-column input, #search-column select {
+    width: 100%;
+}
+#search-buttons {
+    margin-top: 25px;
+}
+#search-buttons button {
+    margin-right: 5px;
+}
+#search-modal {
+    display: inline-block;
+    margin-top: 10px;
+}
+#search-result-container {
+    padding: 0px;
+    margin: 0px;
+}
+#search-results-container .card-header {
+    background-color: transparent;
+    border: none;
+}
+.job-card {
+    padding: 25px;
+    margin: 0px;
+    border-radius: 0px;
+}
+.job-card h4 {
+    font-weight: bold;
+}
+.job-card h4, .job-card h5, .job-card h6, .job-card a {
+    margin: 0px;
+}
+.job-card h5,
+.job-card h6 {
+    margin-top: 7px;
+}
+.job-card h6 + p {
+    font-style: italic;
+    margin-top: 10px;
+    line-height: initial;
+}
+.job-card h6 + p + p {
+    margin-bottom: 10px;
+}
+.job-card a {
+    color: initial;
+}
+.job-card button {
+    text-align: left;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+.job-card:nth-child(even) {
+    background-color: rgba(0,0,0,.05);
+    border-top: none;
+    border-bottom: none;
+}
+.job-card:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.125)
+}
+
 
