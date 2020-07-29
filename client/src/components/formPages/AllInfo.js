@@ -1,6 +1,8 @@
   
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { ProgressBar, Step} from "react-step-progress-bar";
+import './form.css';
 
 class AllInfo extends Component {
     back = e => {
@@ -41,8 +43,46 @@ class AllInfo extends Component {
     render(){
         const { status,interest, jobTitle, jobCompany, jobLocation, jobAdURL, LastComm, LastCommDate, poc, pocEmail, pocPhone, notes  } = this.props;
         return(
-            <>
-                <h2>Here is the information you entered:</h2>
+            <div className="application-form">
+                                <ProgressBar percent={100}>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                </ProgressBar>
+                <h4>Here is the information you entered:</h4>
 
                 Job: <b>{jobTitle}</b><br />
                 Company: <b>{jobCompany}</b><br />
@@ -55,14 +95,14 @@ class AllInfo extends Component {
                 Contact Name:<b>{poc}</b><br />
                 Contact Email Info:<b>{pocEmail}</b><br />
                 Contact Phone Info:<b>{pocPhone}</b><br />
-                Extra Notes=<b>{notes}</b><br />
+                Extra Notes:<b>{notes}</b><br />
                 <button className="Back" onClick={this.back}>
                     « Make Changes
                 </button>
                 <button className="Next" onClick={(e)=>this.submit(e,this.props)}>
                 Submit
                 </button>
-            </>
+            </div>
         );
     }
 }

@@ -1,0 +1,53 @@
+.application-form{
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 2px solid #e74c3c;
+    padding: 2rem;
+}
+
+label{
+    width: 100%;
+}
+
+.form-control{
+    border-color: #2980b9;
+    border-width: 2px;
+}
+
+.form-group{
+    width: 80%;
+}
+
+.next{
+    cursor: pointer;
+}
+
+.next:hover{
+    background-color: yellowgreen;
+}
+
+.text-area{
+    border-color: #2980b9;
+    border-width: 2px;
+    border-radius: 5px;
+    width: 80%;
+    padding: 1rem;
+    border-color: #2980b9;
+
+}
+
+.indexedStep {
+    color: white;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    background-color: rgba(211, 211, 211, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .indexedStep.accomplished {
+    background-color: rgba(0, 116, 217, 1);
+  }

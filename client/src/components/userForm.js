@@ -109,7 +109,6 @@ export class StepForm extends Component {
 
         return(
             <>
-                <h2>Step {step} of 4.</h2>
                 {this.showStep()}
             </>
         );

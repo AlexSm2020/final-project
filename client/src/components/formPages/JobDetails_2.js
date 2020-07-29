@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import "react-step-progress-bar/styles.css";
+import { ProgressBar, Step} from "react-step-progress-bar";
+import './form.css';
  
 const options = [
     { value: 'one', label: 'One' },
@@ -25,8 +28,46 @@ class JobDetails_2 extends Component {
         const { status, interest, LastComm, LastCommDate, handleChange } = this.props;
         const defaultOption = options[0];
         return(
-            <>
-                <h2>Enter your job information:</h2>
+            <div className="application-form">
+                                <ProgressBar percent={50}>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                </ProgressBar>
+                <h3>Enter your job information:</h3>
                 <div className="form-group">
                     <label>What is the current status of this Job?</label>
                     <select className="form-control" name="status" defaultValue="" value={status} onChange={handleChange('status')}>
@@ -34,7 +75,7 @@ class JobDetails_2 extends Component {
                         <option>Pre-application</option>
                         <option>New</option>
                         <option>Phone Screen</option>
-                        <option>interview</option>
+                        <option>Interview</option>
                         <option>Coding Assessment</option>
                         <option>Offer</option>
                         <option>Accepted</option>
@@ -76,7 +117,7 @@ class JobDetails_2 extends Component {
                 <button className="Next" onClick={this.continue}>
                     Next »
                 </button>
-            </>
+            </div>
         );
     }
 }

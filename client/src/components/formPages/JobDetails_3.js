@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import "react-step-progress-bar/styles.css";
+import { ProgressBar, Step} from "react-step-progress-bar";
+import './form.css';
  
 
 class JobDetails_3 extends Component {
@@ -15,10 +18,48 @@ class JobDetails_3 extends Component {
     render(){
         const {  notes, poc, pocEmail, pocPhone, handleChange } = this.props;
         return(
-            <>
-                <h2>Enter your job information:</h2>
+            <div className="application-form">
+                                <ProgressBar percent={75}>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                    <Step>
+                        {({ accomplished, index }) => (
+                            <div
+                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                            >
+                                {index + 1}
+                            </div>
+                        )}
+                    </Step>
+                </ProgressBar>
+                <h3>Enter your job information:</h3>
  
-                <label>
+                <label className="lable1">
                     <input 
                         type="text"
                         name="poc"
@@ -46,8 +87,8 @@ class JobDetails_3 extends Component {
                     />
                 </label>
                 <label>
-                    <input 
-                        type="text"
+                    <input className="text-area"
+                        type="textarea"
                         name="notes"
                         value={notes}
                         onChange={handleChange('notes')}
@@ -61,7 +102,7 @@ class JobDetails_3 extends Component {
                 <button className="Next" onClick={this.continue}>
                 Continue »
                 </button>
-            </>
+            </div>
         );
     }
 }
