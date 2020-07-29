@@ -25,13 +25,18 @@ class SingleApplication extends Component {
                 title: 'Accepted Offer'
             }],
             currentStep: 0,
+            dropDownOpen: false
         };
         this.onClickNext = this.onClickNext.bind(this)
         this.onClickBack = this.onClickBack.bind(this)
+        this.toggleDropDown = this.toggleDropDown.bind(this)
+        this.changeDropDownValue = this.changeDropDownValue.bind(this)
+        this.editTask = this.editTask.bind(this)
+        this.editInterest = this.editInterest.bind(this)
     }
 
     onClickNext() {
-        const { appData , steps, currentStep } = this.state;
+        const { currentStep } = this.state;
         if (currentStep < 5) {
             this.setState({
                 currentStep: currentStep + 1
@@ -41,12 +46,40 @@ class SingleApplication extends Component {
     }
     
     onClickBack() {
-        const { appData, steps, currentStep } = this.state;
+        const { currentStep } = this.state;
         if (currentStep > 0) {
             this.setState({
                 currentStep: currentStep - 1
             })
         }
+    }
+
+    toggleDropDown () {
+        if (this.state.dropDownOpen) {
+            this.setState({
+                dropDownOpen: false
+            })
+        }
+        else {
+            this.setState({
+                dropDownOpen: true
+            })
+        }
+    }
+
+    changeDropDownValue (e) {
+        this.setState({
+            dropDownValue: e.currentTarget.textContent
+        })
+
+    }
+
+    editTask () {
+
+    }
+
+    editInterest () {
+
     }
 
     componentDidMount() {
@@ -116,7 +149,7 @@ render () {
                                 <Card className="notesCard">
                                     <CardBody>
                                         <CardText>{appData.notes}</CardText>
-                                        <Modal modalType="editNotes" className="notesBtn" buttonLabel="Edit Notes" />
+                                        <Modal modalTitle="Edit Notes" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editNotes" className="notesBtn" buttonLabel="Edit Notes" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -126,14 +159,14 @@ render () {
                             <Col xs="1"></Col>
                             <Col className="colMargin" xs="10">
                                 <div>
-                                    <h4 className="taskTitle">Tasks</h4>
-                                    <Modal modalType="addTask" className="addTask" buttonLabel="Add Task" />
+                                    <h4 className="taskHeader">Tasks</h4>
+                                    <Modal modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
                                 </div>
                                 <Card className="taskCard">
                                     <CardBody class="taskBody">
                                         <CardText>Title: </CardText>
                                         <CardText>Description: </CardText>
-                                        <Modal modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
+                                        <Modal modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
                                     </CardBody>
                                 </Card>
 
@@ -151,7 +184,7 @@ render () {
                                 <Card className="interestCard">
                                     <CardBody>
                                         <CardText className="interestText">{this.state.appData.interest}</CardText>
-                                        <Modal modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
+                                        <Modal modalTitle="Edit Interest" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
                                         <Button className="jobAdBtn">View Job Ad</Button>
                                     </CardBody>
                                 </Card>
@@ -166,7 +199,7 @@ render () {
                                         <CardText>Point of Contact: {this.state.appData.poc} </CardText>
                                         <CardText>Email Address: {this.state.appData.pocEmail} </CardText>
                                         <CardText>Phone Number: {this.state.appData.pocPhone} </CardText>
-                                        <Modal modalType="editContact" className="contactBtn" buttonLabel="Edit Info" />
+                                        <Modal modalTitle="Edit Contact Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editContact" className="contactBtn" buttonLabel="Edit Info" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -186,7 +219,7 @@ render () {
                                     <CardBody class="lastCommBody">
                                         <CardText>Type: </CardText>
                                         <CardText>Last Communication Date: </CardText>
-                                        <Modal modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
+                                        <Modal modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
                                     </CardBody>
                                 </Card>
                             </Col>
