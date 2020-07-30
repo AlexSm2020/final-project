@@ -4,12 +4,18 @@ import PhoneInput from "react-phone-number-input"
 const PhoneInputComponent = (props) => {
     const [value, setValue] = useState()
 
+    const onChange = e => {
+        props.handleChange(e);
+        setValue();
+    }
+
     return (
         
             <PhoneInput
-                placeholder="Enter phone number"
+                placeholder={props.pocPhone}
                 value={value}
-                onChange={setValue}
+                name="pocPhoneNumber"
+                onChange={onChange}
                 defaultCountry="US"
             >
             </PhoneInput>
