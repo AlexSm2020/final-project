@@ -20,6 +20,8 @@ html {
 			height: 100%;
 			background: #ffffff !important;
 		}
+
+		
 		.user_card_signup {
 			height: 700px;
 			width: 500px;
@@ -43,7 +45,7 @@ html {
 			width: 170px;
 			top: -55px;
 			border-radius: 50%;
-			background: #3C5148;
+			background: white;
 			padding: 10px;
 			text-align: center;
 		}
@@ -104,7 +106,7 @@ html {
 			width: 170px;
 			top: -75px;
 			border-radius: 50%;
-			background: #3C5148;
+			background: white;
 			padding: 10px;
 			text-align: center;
 		}
@@ -113,6 +115,7 @@ html {
 			width: 150px;
 			border-radius: 50%;
 			border: 2px solid white;
+			background-color: white
 		}
 		.form_container_login {
 			margin-top: 100px;
@@ -143,6 +146,71 @@ html {
 		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
 			background-color: red!important;
 		}
+
+/* CSS for Landing Page */
+#landing-logo {
+	margin: auto;
+}
+
+#landing-container {
+	margin: auto;
+	text-align: center;
+	padding: 25px;
+}
+
+#landing-logo {
+	width: 250px;
+}
+
+#landing-container h1 {
+	color: rgb(23,145,255);
+	font-weight: bolder;
+	font-size: 8em;
+	margin-bottom: 0px;
+}
+
+#landing-container h2 {
+	text-transform: uppercase;
+	font-size: 1.75em;
+	letter-spacing: .5em;
+	margin-top: -20px;
+	margin-bottom: 15px;
+	color: rgb(63,1,181);
+}
+
+#landing-container h3 {
+	font-size: 1.75em;
+	font-style: italic;
+	letter-spacing: .05em;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#landing-container button {
+	background-color: rgb(63,1,181);
+	margin-bottom: 15px;
+}
+
+#landing-container a + a {
+	display: block;
+	margin-bottom: 50px;
+	color: initial;
+}
+
+@media screen and (max-width: 625px) {
+	#landing-container h1 {
+		font-size: 4.5em;
+	}
+	#landing-logo {
+		width: 150px;
+	}
+	#landing-container h2 {
+		font-size: 1em;
+	}
+	#landing-container h3 {
+		font-size: 1.25em;
+	}
+}
 
 /* CSS for Applications View */
 
@@ -210,36 +278,51 @@ html {
 }
 
 /* CSS for Search Page */
+
 #search-container {
-    padding: 50px;
+	margin: auto;
 }
-#search-column {
-    padding-top: 0px;
+
+#search-form, .row {
+	margin: auto;
+	width: 100%;
+	padding: 0px 25px;
+	display: flex;
+	justify-content: stretch;
 }
-#search-column h3 {
-    margin-top: 0px;
+
+#search-form .form-group {
+	width: 100%;
+	padding: 0px;
 }
-#search-column input, #search-column select {
-    width: 100%;
+
+#search-container h3 {
+	text-align: center;
+	font-weight: bold;
+	color: rgb(63,1,181);
+	margin-top: 50px;
 }
+
+#search-form input, #search-form select {
+	width: 100%;
+	margin: 0px 5px;
+}
+
 #search-buttons {
-    margin-top: 25px;
+	margin-top: 17px;
 }
-#search-buttons button {
-    margin-right: 5px;
+
+#search-form .form-group button {
+	margin-left: 5px;
 }
-#search-modal {
-    display: inline-block;
-    margin-top: 10px;
+
+#search-results-container {
+	margin: auto;
+	width: 100%;
+	padding: 0px 100px;
+	margin-top: 25px;
 }
-#search-result-container {
-    padding: 0px;
-    margin: 0px;
-}
-#search-results-container .card-header {
-    background-color: transparent;
-    border: none;
-}
+
 .job-card {
     padding: 25px;
     margin: 0px;

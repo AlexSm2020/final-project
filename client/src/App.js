@@ -60,8 +60,8 @@ logout = () => {
     return (
       <div className="demo-big-content">
     <Layout>
-        <Header className="header-color" title={<Link style={{textDecoration: 'none', color: 'white'}} to="/">JobSearchApp</Link>} scroll>
           <Conditional if={this.state.loggedIn===true}>
+          <Header className="header-color" title={<Link style={{textDecoration: 'none', color: 'white'}} to="/">DreamJob</Link>} scroll>
             <Navigation>
               <Link to="/search">Search</Link>
               <Link to="/userForm">My form</Link>
@@ -70,17 +70,18 @@ logout = () => {
               <Link to="/contact">Contact</Link>
               <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
+            </Header>
           </Conditional>
           <Conditional if={this.state.loggedIn===false}>
-              <Navigation>
+            {null}
+              {/* <Navigation>
                 <Link to="/about">About Us</Link>
                 <Link to="/register">Register Today</Link>
                 <Link to="/login">Log In</Link>
                 <Link to="/contact">Contact</Link>
-              </Navigation>
+              </Navigation> */}
           </Conditional>
-        </Header>
-        <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">JobSearchApp</Link>}>
+        <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">DreamJob</Link>}>
           <Conditional if={this.state.loggedIn===true}>
             <Navigation>
                 <Link to="/search">Search</Link>
@@ -92,12 +93,13 @@ logout = () => {
             </Navigation>
           </Conditional>
             <Conditional if={this.state.loggedIn === false}>
-              <Navigation>
+              {null}
+              {/* <Navigation>
                 <Link to="/about">About Us</Link>
                 <Link to="/register">Register Today</Link>
                 <Link to="/login">Log In</Link>
                 <Link to="/about">Contact</Link>
-              </Navigation>
+              </Navigation> */}
             </Conditional>
         </Drawer>
         <Content>

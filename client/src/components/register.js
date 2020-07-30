@@ -62,7 +62,7 @@ class Register extends Component {
         // If we get back a response from our database, we determine this to be successful and can redirect the user to the home screen.
         if (response.data.redirect) {
           console.log("successful signup")
-          window.location = "/"
+          window.location = "/search"
         } else {
           console.log("Sign-up error");
         }
@@ -82,7 +82,7 @@ class Register extends Component {
           <div className="user_card_signup">
             <div className="d-flex justify-content-center">
               <div className="brand_logo_container_signup">
-                <img src={logo} className="brand_logo_signup" alt="logo"></img>
+                <img src="globe-logo.svg" className="brand_logo_signup" alt="logo"></img>
               </div>
             </div>
             <div className="d-flex justify-content-center form_container_signup">
