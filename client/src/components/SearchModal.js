@@ -40,10 +40,9 @@ const SearchModal = (props) => {
     return (
         <div id={props.modalId}>
             <Button color={props.modalButtonColor} onClick={toggle}>{props.modalButtonText}</Button>
-            <Modal centered isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>{props.modalHeader}</ModalHeader>
-                <ModalBody>{props.modalBody}</ModalBody>
-                <ModalFooter toggle={toggle}>
+            <Modal centered isOpen={modal}>
+                <ModalHeader>{props.modalHeader}</ModalHeader>
+                <ModalFooter>
                     <Button color="danger" onClick={toggle}>Cancel</Button>
                     <Button color="primary" onClick={props.modalId === "search-modal" ? handleSearchSave : trackApplication}>{props.modalConfirm}</Button>
                 </ModalFooter>

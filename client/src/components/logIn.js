@@ -51,7 +51,7 @@ handleFormSubmit = event => {
         console.log("200")
 
         if (response.data.redirect === "/") {
-          window.location = "/search"
+          window.location = "/"
         }
         else if (response.data.redirect === "/login") {
           window.location = "/login"

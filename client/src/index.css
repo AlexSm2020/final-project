@@ -463,11 +463,33 @@ html {
 	margin-left: 5px;
 }
 
+#search-form .form-group label:nth-of-type(3) {
+	white-space: no-wrap;
+	overflow: hidden;
+}
+
+.modal-header form {
+	width: 100%;
+	margin: auto;
+	text-align: center
+}
+.modal-header .modal-title {
+	width: 100%;
+	text-align: center;
+}
+.modal-header form input {
+	margin-top: 10px;
+	width: 100%
+}
+
 #search-results-container {
 	margin: auto;
-	width: 100%;
-	padding: 0px 100px;
-	margin-top: 25px;
+	width: 90%;
+	margin-top: 50px;
+}
+
+#track-modal {
+	display: inline;
 }
 
 .job-card {
@@ -507,7 +529,8 @@ html {
     border-bottom: none;
 }
 .job-card:last-child {
-    border-bottom: 1px solid rgba(0,0,0,.125)
+	border-bottom: 1px solid rgba(0,0,0,.125);
+	margin-bottom: 50px;
 }
 
 
