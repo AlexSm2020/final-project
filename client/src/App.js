@@ -81,8 +81,8 @@ logout = () => {
                 <Link to="/contact">Contact</Link>
               </Navigation> */}
           </Conditional>
+          <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">DreamJob</Link>}>
           <Conditional if={this.state.loggedIn===true}>
-            <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">DreamJob</Link>}>
             <Navigation>
                 <Link to="/search">Search</Link>
                 <Link to="/userForm">My form</Link>
@@ -91,9 +91,8 @@ logout = () => {
                 <Link to="/contact">Contact</Link>
                 <Link to="/login" onClick={this.logout}>Logout</Link>
             </Navigation>
-            </Drawer>
           </Conditional>
-            <Conditional if={this.state.loggedIn === false}>
+          <Conditional if={this.state.loggedIn === false}>
               {null}
               {/* <Navigation>
                 <Link to="/about">About Us</Link>
@@ -102,9 +101,10 @@ logout = () => {
                 <Link to="/about">Contact</Link>
               </Navigation> */}
             </Conditional>
+          </Drawer>
         <Content>
             <div className="page-content" />
-            <Main />
+            <Main loggedIn={this.state.loggedIn} />
         </Content>
     </Layout>
 </div>

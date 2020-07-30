@@ -62,7 +62,7 @@ class Register extends Component {
         // If we get back a response from our database, we determine this to be successful and can redirect the user to the home screen.
         if (response.data.redirect) {
           console.log("successful signup")
-          window.location = "/search"
+          window.location = "/"
         } else {
           console.log("Sign-up error");
         }
