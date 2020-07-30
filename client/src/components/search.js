@@ -59,43 +59,43 @@ class Search extends React.Component {
             })
         }
     }
-    
+
     submitSearch = (event) => {
         event.preventDefault();
         this.setState({ results: [] });
         axios.post('user/indeed', this.state)
             .then((response) => this.setState({ results: response.data.results }));
     }
-    
+
     render() {
         console.log('State: ', this.state);
         return (
-            <div className="row" id="search-container">
-                <div className="col-md-4 col-sm-12" id="search-column">
-                    <h3>Search Form</h3>
-                    <Form>
-                        <SavedSearchSelect onChange={this.loadSearch}>
-                            <option></option>
-                            {this.state.searches === undefined ? <SavedSearchOption search={''} /> : this.state.searches.map(search => (
-                                <SavedSearchOption key={search.name} search={search.name} />
-                            ))}
-                        </SavedSearchSelect>
-                        <FormGroup>
+            <div id="search-container">
+                <h3>Your Next Job Awaits...</h3>
+                <Form id="search-form" autoComplete="off" inline>
+                    <div className="row d-flex justify-content-center">
+                        <FormGroup className="col-3">
                             <Label for="query">Search</Label>
-                            <Input type="text" name="query" id="query" aria-describedby="query" value={this.state.query} onChange={this.handleChange} />
+                            <Input type="text" name="query" id="query" aria-describedby="query" list="savedSearches" value={this.state.query} onChange={this.loadSearch} />
+                            <SavedSearchSelect onChange={this.loadSearch}>
+                                <option></option>
+                                {this.state.searches === undefined ? <SavedSearchOption search={''} /> : this.state.searches.map(search => (
+                                    <SavedSearchOption key={search.name} search={search.name} />
+                                ))}
+                            </SavedSearchSelect>
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup className="col-3">
                             <Label for="location">Location</Label>
-                            <Input type="text" name="location" id="location" aria-describedby="location" value={this.state.location} onChange={this.handleChange} />
+                            <Input className="form-control" type="text" name="location" id="location" aria-describedby="location" value={this.state.location} onChange={this.handleChange} />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup className="col-2">
                             <Label for="radius">Radius (mi)</Label>
-                            <Input type="text" name="radius" id="radius" aria-describedby="radius" value={this.state.radius} onChange={this.handleChange} />
+                            <Input className="form-control" type="text" name="radius" id="radius" aria-describedby="radius" value={this.state.radius} onChange={this.handleChange} />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup className="col-2" id="jobTypeGroup">
                             <Label for="jobType">Job Type</Label>
-                            <Input type="select" name="jobType" id="jobType" value={this.state.jobType} onChange={this.handleChange}>
-                                <option disabled></option>
+                            <Input className="form-control" type="select" name="jobType" id="jobType" value={this.state.jobType} onChange={this.handleChange}>
+                                <option></option>
                                 <option>Full-Time</option>
                                 <option>Part-Time</option>
                                 <option>Contract</option>
@@ -103,7 +103,7 @@ class Search extends React.Component {
                                 <option>Temporary</option>
                             </Input>
                         </FormGroup>
-                        <FormGroup id="search-buttons">
+                        <FormGroup className="col-2" id="search-buttons">
                             <Button color="primary" onClick={this.submitSearch}>Submit</Button>
                             <SearchModal
                                 name={this.state.name}
@@ -121,9 +121,9 @@ class Search extends React.Component {
                                 getSavedSearches={this.getSavedSearches}
                             />
                         </FormGroup>
-                    </Form>
-                </div>
-                <div className="col-md-6 col-sm-12" id="search-results-container">
+                    </div>
+                </Form>
+                <div id="search-results-container">
                     {(this.state.results).map(result => (
                         <SearchResultCard
                             key={result.jobkey}
@@ -137,7 +137,7 @@ class Search extends React.Component {
                         />
                     ))}
                 </div>
-            </div >
+            </div>
         );
     }
 }

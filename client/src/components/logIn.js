@@ -51,7 +51,7 @@ handleFormSubmit = event => {
         console.log("200")
 
         if (response.data.redirect === "/") {
-          window.location = "/"
+          window.location = "/search"
         }
         else if (response.data.redirect === "/login") {
           window.location = "/login"
@@ -73,7 +73,7 @@ render() {
           <div className="user_card_login">
             <div className="d-flex justify-content-center">
               <div className="brand_logo_container_login">
-                <img src={logo} className="brand_logo_login" alt="logo"></img>
+                <img src="globe-logo.svg" className="brand_logo_login" alt="logo"></img>
               </div>
             </div>
             <div className="d-flex justify-content-center form_container_login">
