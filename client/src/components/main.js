@@ -12,9 +12,10 @@ import Applications from './applications';
 import SingleApplication from './singleApplication';
 import PrivateRoute from "./privateRoute";
 
-const Main = () => (
-  <Switch>
-    <Route exact path="/" component={LandingPage} />
+function Main(props) {
+  return (
+    <Switch>
+    <Route exact path="/" component={props.loggedIn === false ? LandingPage : Search} />
     <Route exact path="/about" component={About} />
     <Route exact path="/contact" component={Contact} />
     <Route exact path="/login" component={LogIn} />
@@ -25,6 +26,10 @@ const Main = () => (
     <PrivateRoute exact path="/singleApplication" component={SingleApplication} />
   </Switch>
 
-)
+  )
+}
+
+
+
 
 export default Main;

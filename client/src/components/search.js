@@ -40,15 +40,18 @@ class Search extends React.Component {
     }
 
     loadSearch = (event) => {
-        if (!event.target.value) {
+
+        const savedSearch = this.state.searches.find(search => search.name === event.target.value)
+        
+        if (!savedSearch) {
             this.setState({
-                query: '',
-                name: '',
                 location: '',
                 radius: '',
-                jobType: '',
+                jobType: ''
             })
-        } else {
+            this.handleChange(event)
+        }
+        else {
             const savedSearch = this.state.searches.find(search => search.name === event.target.value)
             this.setState({
                 name: savedSearch.name,
@@ -78,7 +81,6 @@ class Search extends React.Component {
                             <Label for="query">Search</Label>
                             <Input type="text" name="query" id="query" aria-describedby="query" list="savedSearches" value={this.state.query} onChange={this.loadSearch} />
                             <SavedSearchSelect onChange={this.loadSearch}>
-                                <option></option>
                                 {this.state.searches === undefined ? <SavedSearchOption search={''} /> : this.state.searches.map(search => (
                                     <SavedSearchOption key={search.name} search={search.name} />
                                 ))}
@@ -114,8 +116,12 @@ class Search extends React.Component {
                                 modalId={"search-modal"}
                                 modalButtonColor={"success"}
                                 modalButtonText={"Save"}
-                                modalHeader={"Enter a name to save your search"}
-                                modalBody={<Input type="text" name="name" id="name" aria-describedby="name" onChange={this.handleChange} />}
+                                modalHeader={
+                                <Form>
+                                <Label for="name">Enter a name to save your search</Label>
+                                <Input type="text" name="name" id="name" aria-describedby="name" onChange={this.handleChange} />
+                                </Form>
+                                }
                                 modalCancel={'Cancel'}
                                 modalConfirm={'Save'}
                                 getSavedSearches={this.getSavedSearches}

@@ -14,6 +14,7 @@ function SearchResultCard(props) {
             <div className="job-card-buttons">
                 <SearchModal
                     modalId={"track-modal"}
+                    modalButtonColor={"primary"}
                     modalButtonText={"Track Application"}
                     modalHeader={"Would you like to start tracking this application?"}
                     modalConfirm={'Yes'}
@@ -23,7 +24,7 @@ function SearchResultCard(props) {
                     url={props.url}
                     application={props.application}
                 />
-                <Link to={{ pathname: props.url }} target="_blank"><Button>Apply</Button></Link>
+                <Link to={{ pathname: props.url }} target="_blank"><Button color="success">Apply</Button></Link>
             </div>
         </div>
     );
