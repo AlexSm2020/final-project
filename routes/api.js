@@ -163,6 +163,16 @@ router.get("/applications", function (req, res) {
 
 })
 
+// Get single application to populate Single App view page
+
+router.get("/applications/:id", function (req, res) {
+    db.Application.findById({_id: req.params.id})
+        .populate({path: "tasks", options: { sort: {"createdAt": -1}}})
+        .then(dbApplication => {
+            res.json(dbApplication)
+        })
+})
+
 // Updating Task
 
 // Saving and getting searches

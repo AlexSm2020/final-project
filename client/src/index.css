@@ -277,9 +277,13 @@ html {
 	margin-left: 7%;
 }
 
-.notesText, .taskDescription {
+.taskDescription {
 	text-align: left;
-	width: 200%;
+	width: 250%;
+}
+.notesText {
+	text-align: left;
+	width: 350%;
 }
 
 .editNotesLabel {

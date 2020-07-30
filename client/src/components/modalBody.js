@@ -22,13 +22,13 @@ class ModalBodyContent extends Component {
                 return (
                             <Dropdown isOpen={this.props.dropDownOpen}  toggle={this.props.toggleDropDown}>
                                 <DropdownToggle caret>
-                                 Choose Interest
+                                 {this.props.currentInterest}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Highly Interested</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Interested</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Medium</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Low</DropdownItem>
+                                    <DropdownItem name="interestValue" onClick={this.props.changeDropDownValue}>Highly Interested</DropdownItem>
+                                    <DropdownItem name="interestValue" onClick={this.props.changeDropDownValue}>Interested</DropdownItem>
+                                    <DropdownItem name="interestValue" onClick={this.props.changeDropDownValue}>Medium</DropdownItem>
+                                    <DropdownItem name="interestValue" onClick={this.props.changeDropDownValue}>Low</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                         )
@@ -38,7 +38,7 @@ class ModalBodyContent extends Component {
                                 <FormGroup>
                                     <Row>
                                         <Col>
-                                            <Input type="textarea" bsSize="lg" name="notesText" className="notesText"></Input>
+                                            <Input defaultValue={this.props.modalNotes} onChange={this.props.handleChange} type="textarea" bsSize="lg" name="notesText" className="notesText"></Input>
                                         </Col>
                                     </Row>
                                 </FormGroup>
@@ -51,17 +51,17 @@ class ModalBodyContent extends Component {
                             <FormGroup>
                                 <Label for="taskTitle">Title</Label>
                                 <br></br>
-                                <Input type="text" bsSize="lg" name="taskTitle" className="taskTitle"></Input>
+                                <Input onChange={this.props.handleChange} type="text" bsSize="lg" name="taskTitle" className="taskTitle"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="dueDate">Due Date</Label>
+                                <Label for="taskDueDate">Due Date</Label>
                                 <br></br>
-                                <Input type="date" bsSize="lg" name="dueDate" className="taskDueDate"></Input>
+                                <Input onChange={this.props.handleChange} type="date" bsSize="lg" name="taskDueDate" className="taskDueDate"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="description">Description</Label>
+                                <Label for="taskDescription">Description</Label>
                                 <br></br>
-                                <Input type="textarea" bsSize="lg" name="description" className="taskDescription"></Input>
+                                <Input onChange={this.props.handleChange} type="textarea" bsSize="lg" name="taskDescription" className="taskDescription"></Input>
                             </FormGroup>
                         </Form>
                         )
@@ -71,27 +71,27 @@ class ModalBodyContent extends Component {
                             <FormGroup>
                                 <Dropdown isOpen={this.props.dropDownOpen}  toggle={this.props.toggleDropDown}>
                                 <DropdownToggle caret>
-                                    Type
+                                    {this.props.lastCommType}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>In-Person</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Email</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Phone Call</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Video Call</DropdownItem>
-                                    <DropdownItem onClick={this.props.changeDropDownValue}>Text</DropdownItem>
+                                    <DropdownItem name="commValue" onClick={this.props.changeDropDownValue}>In-Person</DropdownItem>
+                                    <DropdownItem name="commValue" onClick={this.props.changeDropDownValue}>Email</DropdownItem>
+                                    <DropdownItem name="commValue" onClick={this.props.changeDropDownValue}>Phone Call</DropdownItem>
+                                    <DropdownItem name="commValue" onClick={this.props.changeDropDownValue}>Video Call</DropdownItem>
+                                    <DropdownItem name="commValue" onClick={this.props.changeDropDownValue}>Text</DropdownItem>
                                 </DropdownMenu>
                                 </Dropdown>
                                 
                             </FormGroup>
                         <FormGroup>
-                            <Label for="date">Date</Label>
+                            <Label for="lastCommDate">Date</Label>
                             <br></br>
-                            <Input type="date" bsSize="lg" name="date" className="taskDueDate"></Input>
+                            <Input defaultValue={this.props.lastCommDate} onChange={this.props.handleChange} type="date" bsSize="lg" name="lastCommDate" className="taskDueDate"></Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="description">Description</Label>
+                            <Label for="lastCommDescription">Description</Label>
                             <br></br>
-                            <Input type="textarea" bsSize="lg" name="description" className="taskDescription"></Input>
+                            <Input defaultValue={this.props.lastCommDescription} onChange={this.props.handleChange} type="textarea" bsSize="lg" name="lastCommDescription" className="taskDescription"></Input>
                         </FormGroup>
                             
                         </Form>
@@ -100,19 +100,19 @@ class ModalBodyContent extends Component {
                 return (
                         <Form>
                             <FormGroup>
-                                <Label for="pocEmail">Point of Contact</Label>
+                                <Label for="pocName">Point of Contact</Label>
                                 <br></br>
-                                <Input type="text" bsSize="lg" name="pocEmail" className="taskTitle"></Input>
+                                <Input defaultValue={this.props.poc} onChange={this.props.handleChange} type="text" bsSize="lg" name="pocName" className="taskTitle"></Input>
                                 </FormGroup>
                             <FormGroup>
-                                <Label for="email">Email</Label>
+                                <Label for="pocEmail">Email</Label>
                                 <br></br>
-                                <Input type="email" bsSize="lg" name="email" className="taskDueDate"></Input>
+                                <Input defaultValue={this.props.pocEmail} onChange={this.props.handleChange} type="email" bsSize="lg" name="pocEmail" className="taskDueDate"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="phoneNumber">Phone Number</Label>
+                                <Label for="pocPhoneNumber">Phone Number</Label>
                                 <br></br>
-                                <PhoneInput></PhoneInput>
+                                <PhoneInput pocPhone={this.props.pocPhone} handleChange={this.props.handleChange}></PhoneInput>
                             </FormGroup>
                         </Form>
                 )

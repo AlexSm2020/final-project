@@ -50,7 +50,7 @@ const ApplicationSchema = new Schema({
     },
     // Last communication with company regarding this application. 
     // Manually entered by user. 
-    lastComm: {
+    lastCommType: {
         type: String
     },
 
@@ -58,6 +58,13 @@ const ApplicationSchema = new Schema({
     // Manually entered by user
     lastCommDate: {
         type: Date
+    },
+
+    // Description of Last Communcation with Company
+    // Manually entered by User
+
+    lastCommDescription: {
+        type: String
     },
     // Any notes that the user would like to add regarding this job application.
     // Manually entered by user
