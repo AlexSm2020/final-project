@@ -29,7 +29,7 @@ const ModalExample = (props) => {
                 break;
             case "editTask":
                 console.log("editTask")
-                props.editTask()
+                props.editTask(props.taskID)
                 setModal(!modal)
                 break;
             case "editComm":
@@ -58,10 +58,10 @@ const ModalExample = (props) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
-                    <ModalBodyContent currentInterest={props.currentInterest} lastCommDescription={props.lastCommDescription} lastCommDate={props.lastCommDate} lastCommType={props.lastCommType} poc={props.poc} pocEmail={props.pocEmail} pocPhone={props.pocPhone} modalNotes={props.modalNotes} handleChange={props.handleChange} dropDownValue={props.dropDownValue} dropDownOpen={dropDownOpen} toggleDropDown={props.toggleDropDown} changeDropDownValue={props.changeDropDownValue} modalType={modalType} />   
+                    <ModalBodyContent taskTitle={props.taskTitle} taskDescription={props.taskDescription} currentInterest={props.currentInterest} lastCommDescription={props.lastCommDescription} lastCommDate={props.lastCommDate} lastCommType={props.lastCommType} poc={props.poc} pocEmail={props.pocEmail} pocPhone={props.pocPhone} modalNotes={props.modalNotes} handleChange={props.handleChange} dropDownValue={props.dropDownValue} dropDownOpen={dropDownOpen} toggleDropDown={props.toggleDropDown} changeDropDownValue={props.changeDropDownValue} modalType={modalType} />   
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={submit}>Submit</Button>{' '}
+                    <Button id={props.taskID} color="primary" onClick={submit}>Submit</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
