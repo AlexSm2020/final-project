@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 const SearchModal = (props) => {
 
@@ -8,7 +9,6 @@ const SearchModal = (props) => {
 
     const toggle = () => setModal(!modal);
 
-    // Handling search saving 
     const handleSearchSave = () => {
 
         const searchObject = {
@@ -27,16 +27,16 @@ const SearchModal = (props) => {
     const trackApplication = () => {
 
         let applicationObject = {
-            title: props.jobtitle,
-            location: props.formattedLocationFull,
-            company: props.company,
+            jobTitle: props.jobtitle,
+            jobLocation: props.formattedLocationFull,
+            jobCompany: props.company,
             jobAdURL: props.url
         }
+
         props.application.push(applicationObject)
         toggle()
-        // window.location = '/userForm';
     }
-    
+
     return (
         <div id={props.modalId}>
             <Button color={props.modalButtonColor} onClick={toggle}>{props.modalButtonText}</Button>
@@ -44,7 +44,10 @@ const SearchModal = (props) => {
                 <ModalHeader>{props.modalHeader}</ModalHeader>
                 <ModalFooter>
                     <Button color="danger" onClick={toggle}>Cancel</Button>
-                    <Button color="primary" onClick={props.modalId === "search-modal" ? handleSearchSave : trackApplication}>{props.modalConfirm}</Button>
+                    {props.modalId === "search-modal" ?
+                        <Button color="primary" onClick={handleSearchSave}>{props.modalConfirm}</Button> :
+                        <Link onClick={trackApplication} to={{ pathname: "/userForm", state: { application: props.application } }} className="btn btn-primary">{props.modalConfirm}</Link>
+                    }
                 </ModalFooter>
             </Modal>
         </div>

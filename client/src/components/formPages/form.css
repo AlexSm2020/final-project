@@ -3,6 +3,7 @@
     margin: 2rem auto;
     border: 2px solid #e74c3c;
     padding: 2rem;
+    overflow: hidden;
 }
 
 label{

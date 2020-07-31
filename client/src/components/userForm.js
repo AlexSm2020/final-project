@@ -27,6 +27,17 @@ export class StepForm extends Component {
         notes: ''
     }
 
+    componentDidMount() {
+        if (this.props.location.state) {
+            this.setState({
+                jobTitle: this.props.location.state.application[0].jobTitle,
+                jobCompany: this.props.location.state.application[0].jobCompany,
+                jobLocation: this.props.location.state.application[0].jobLocation,
+                jobAdURL: this.props.location.state.application[0].jobAdURL,
+            })
+        } 
+    }
+
     nextStep = () => {
         const { step } = this.state;
 
@@ -68,6 +79,8 @@ export class StepForm extends Component {
                 jobTitle={jobTitle} 
                 jobCompany={jobCompany}
                 jobLocation={jobLocation}
+                jobAdURL={jobAdURL}
+
                 
             />);
         if (step === 2)
@@ -75,7 +88,6 @@ export class StepForm extends Component {
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 handleChange={this.handleChange}
-                jobAdURL={jobAdURL}
                 status={status}
                 interest={interest}
 
