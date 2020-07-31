@@ -64,7 +64,7 @@ logout = () => {
           <Header className="header-color" title={<Link style={{textDecoration: 'none', color: 'white'}} to="/">DreamJob</Link>} scroll>
             <Navigation>
               <Link to="/search">Search</Link>
-              <Link to="/userForm">My form</Link>
+              <Link to="/userForm">Track an Application</Link>
               <Link to="/applications">My Applications</Link>
               <Link to="/about">About Us</Link>
               <Link to="/contact">Contact</Link>
@@ -86,7 +86,7 @@ logout = () => {
           <Conditional if={this.state.loggedIn===true}>
             <Navigation>
                 <Link to="/search">Search</Link>
-                <Link to="/userForm">My form</Link>
+                <Link to="/userForm">Track an Application</Link>
                 <Link to="/applications">My Applications</Link>
                 <Link to="/about">About Us</Link>
                 <Link to="/contact">Contact</Link>
