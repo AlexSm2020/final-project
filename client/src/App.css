@@ -115,3 +115,11 @@ p {
   .Back:hover{
     background-color: #9e631b;
   }
+
+  .PhoneInputInput{
+    border-color: #2980b9;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: .5rem;
+
+}

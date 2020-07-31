@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step} from "react-step-progress-bar";
+import { ProgressBar, Step } from "react-step-progress-bar";
 import './form.css';
- 
+import PhoneInput from "react-phone-number-input"
+
 
 class JobDetails_3 extends Component {
     continue = e => {
@@ -15,11 +16,11 @@ class JobDetails_3 extends Component {
         this.props.prevStep();
     }
 
-    render(){
-        const {  notes, poc, pocEmail, pocPhone, handleChange } = this.props;
-        return(
+    render() {
+        const { notes, poc, pocEmail, pocPhone, handleChange } = this.props;
+        return (
             <div className="application-form">
-                                <ProgressBar percent={75}>
+                <ProgressBar percent={75}>
                     <Step>
                         {({ accomplished, index }) => (
                             <div
@@ -58,9 +59,9 @@ class JobDetails_3 extends Component {
                     </Step>
                 </ProgressBar>
                 <h3>Enter your job information:</h3>
- 
+
                 <label className="lable1">
-                    <input 
+                    <input
                         type="text"
                         name="poc"
                         value={poc}
@@ -69,7 +70,7 @@ class JobDetails_3 extends Component {
                     />
                 </label>
                 <label>
-                    <input 
+                    <input
                         type="text"
                         name="pocEmail"
                         value={pocEmail}
@@ -78,13 +79,14 @@ class JobDetails_3 extends Component {
                     />
                 </label>
                 <label>
-                    <input 
-                        type="text"
-                        name="pocPhone"
-                        value={pocPhone}
-                        onChange={handleChange('pocPhone')}
+                    <PhoneInput className="phone-input"
                         placeholder="Contact phone"
-                    />
+                        value={pocPhone}
+                        name="pocPhone"
+                        onChange={handleChange('pocPhone')}
+                        defaultCountry="US"
+                    >
+                    </PhoneInput>
                 </label>
                 <label>
                     <input className="text-area"
@@ -95,12 +97,12 @@ class JobDetails_3 extends Component {
                         placeholder="Any extra notes?"
                     />
                 </label>
-            
+
                 <button className="Back" onClick={this.back}>
                     « Back
                 </button>
                 <button className="Next" onClick={this.continue}>
-                Continue »
+                    Continue »
                 </button>
             </div>
         );

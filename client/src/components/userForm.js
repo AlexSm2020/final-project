@@ -43,7 +43,17 @@ export class StepForm extends Component {
     }
 
     handleChange = input => e => {
-        this.setState({[input]: e.target.value});
+        if (typeof e === "undefined"){
+            return
+        }
+        
+        else if (typeof e === "string") {
+            this.setState({
+                pocPhone: e
+            })
+        }else{
+            this.setState({[input]: e.target.value});
+        }
     }
 
     showStep = () => {

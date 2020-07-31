@@ -374,6 +374,7 @@ render () {
                                         <CardText>Last Communication Date: {this.state.lastCommDate} </CardText>
                                         <CardText>Description: {this.state.lastCommDescription}</CardText>
                                         <Modal lastCommType={this.state.lastCommType} lastCommDate={this.state.lastCommDate} lastCommDescription={this.state.lastCommDescription} handleChange={this.handleChange} editComm={this.editComm} modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
+
                                     </CardBody>
                                 </Card>
                             </Col>

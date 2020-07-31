@@ -155,6 +155,7 @@ router.post("/startApplication", async function (req, res) {
 // Get all applications for a user's view of all applications. Sort by most recent created date.
 
 router.get("/applications", function (req, res) {
+    console.log("req.user",req.user)
     db.User.findById({_id: req.user._id})
         .populate({path: "applications", options: { sort: {"createdAt": -1}}})
         .then(dbApplications => {
