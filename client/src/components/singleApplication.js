@@ -25,7 +25,6 @@ class SingleApplication extends Component {
             }, {
                 title: 'Accepted Offer'
             }],
-            currentStep: 0,
             dropDownOpen: false,
             dropDownValue: "Select"
         };
@@ -33,6 +32,7 @@ class SingleApplication extends Component {
         this.onClickBack = this.onClickBack.bind(this)
         this.toggleDropDown = this.toggleDropDown.bind(this)
         this.changeDropDownValue = this.changeDropDownValue.bind(this)
+        this.editInfo = this.editInfo.bind(this)
         this.editInterest = this.editInterest.bind(this)
         this.editNotes = this.editNotes.bind(this)
         this.editTask = this.editTask.bind(this)
@@ -47,8 +47,18 @@ class SingleApplication extends Component {
     onClickNext() {
         const { currentStep } = this.state;
         if (currentStep < 5) {
+            let newStep = currentStep + 1
+            let newStatus = this.state.steps[newStep]
+            const body = {
+                status: newStatus.title
+            }
+            Axios.put("/user/application/" + this.state._id, body)
+                .then(response => {
+                    this.setState(response.data)
+                })
+
             this.setState({
-                currentStep: currentStep + 1
+                currentStep: newStep
             })
         }
         
@@ -57,6 +67,15 @@ class SingleApplication extends Component {
     onClickBack() {
         const { currentStep } = this.state;
         if (currentStep > 0) {
+            let newStep = currentStep - 1
+            let newStatus = this.state.steps[newStep]
+            const body = {
+                status: newStatus.title
+            }
+            Axios.put("/user/application/" + this.state._id, body)
+                .then(response => {
+                    this.setState(response.data)
+                })
             this.setState({
                 currentStep: currentStep - 1
             })
@@ -92,14 +111,46 @@ class SingleApplication extends Component {
 
     }
 
+    editInfo(){
+        const body = {
+            title: this.state.title,
+            company: this.state.company,
+            location: this.state.location,
+            jobAdURL: this.state.jobAdURL
+        }
+       
+        Axios.put("/user/application/" + this.state._id, body)
+            .then(response => {
+                console.log(response)
+            })
+
+    }
+
     editInterest () {
         console.log("Edit Interest function fired")
         // Grabbing dropdown value to submit as interest level on api call
         console.log(this.state.dropDownValue)
+
+        const body = {
+            interest: this.state.dropDownValue
+        }
+
+        Axios.put("/user/application/" + this.state._id, body)
+            .then(response => {
+                this.setState(response.data)
+            })
     }
 
     editNotes () {
         console.log("Edit Notes function fired")
+        const body = {
+            notes: this.state.notes
+        }
+
+        Axios.put("/user/application/" + this.state._id, body)
+            .then(response => {
+                this.setState(response.data)
+            })
     }
 
     editTask (id) {
@@ -177,11 +228,46 @@ class SingleApplication extends Component {
     editComm () {
         console.log("Edit comm function fired")
         // Grabbing dropdownvalue to submit for type on api call
-        console.log(this.state.dropDownValue)
+        let pass = false
+        let commTypeValues = ["In-Person", "Email", "Phone Call", "Video Call", "Text"]
+        commTypeValues.forEach( value=> {
+            if (this.state.dropDownValue===value){
+                pass=true
+            }
+        })
+
+        if (!this.state.lastCommDate || !this.state.lastCommDescription || pass===false) {
+            console.log("Error - incomplete information")
+            alert("Please ensure all fields are entered completely")
+        }
+        else {
+            console.log("all three are good")
+            const body = {
+                lastCommType: this.state.dropDownValue,
+                lastCommDate: this.state.lastCommDate,
+                lastCommDescription: this.state.lastCommDescription
+            }
+
+            Axios.put("user/application/" + this.state._id, body)
+                .then(response => {
+                    this.setState(response)
+                })
+        }
     }
 
     editContact() {
         console.log("Edit contact function fired")
+
+        const body = {
+            poc: this.state.poc,
+            pocEmail: this.state.pocEmail,
+            pocPhone: this.state.pocPhone
+        }
+
+        Axios.put("user/application/" + this.state._id, body)
+            .then(response => {
+                this.setState(response)
+            })
     }
 
     addTask() {
@@ -215,6 +301,30 @@ class SingleApplication extends Component {
 
         else {
             switch(e.currentTarget.name){
+                case "title":
+                    console.log("title")
+                    this.setState({
+                        title: e.currentTarget.value
+                    })
+                    break;
+                case "company":
+                    console.log("company")
+                    this.setState({
+                        company: e.currentTarget.value
+                    })
+                    break;
+                case "location":
+                    console.log("location")
+                    this.setState({
+                        location: e.currentTarget.value
+                    })
+                    break;
+                case "jobAdURL":
+                    console.log("jobAdURL")
+                    this.setState({
+                        jobAdURL: e.currentTarget.value
+                    })
+                    break;
                 case "notesText":
                     console.log("notesText")
                     this.setState({
@@ -295,32 +405,32 @@ class SingleApplication extends Component {
             .then(response => {
                 console.log(response)
                 this.setState(response.data)
-                var statusNum;
+                var currentStep;
                 switch (response.data.status) {
                     case "Pre-Application":
-                        statusNum = 0
+                        currentStep = 0
                         break;
                     case "Submitted Application":
-                        statusNum = 1
+                        currentStep = 1
                         break;
                     case "Interview":
-                        statusNum = 2
+                        currentStep = 2
                         break;
                     case "Assessment":
-                        statusNum = 3
+                        currentStep = 3
                         break;
                     case "Offered":
-                        statusNum = 4
+                        currentStep = 4
                         break;
                     case "Accepted Offer":
-                        statusNum = 5
+                        currentStep = 5
                         break;
                     default:
-                        statusNum = 0
+                        currentStep = 0
                 }
 
                 this.setState({
-                    statusNum: statusNum
+                    currentStep: currentStep
                 })
             })
     }
@@ -342,6 +452,7 @@ render () {
                     </div>
                     <div>
                         <Stepper steps={this.state.steps} activeStep = {this.state.currentStep}  />
+                        <Modal title={this.state.title} company={this.state.company} location={this.state.location} jobAdURL={this.state.jobAdURL} handleChange={this.handleChange} editInfo={this.editInfo} modalType="editInfo" className="editInfoBtn" buttonLabel="Edit Info"> </Modal>
                         <Button className="statusBtn" onClick={this.onClickBack}>Move Back </Button>
                         <Button className="statusBtn" onClick={ this.onClickNext }>Move Forward </Button>
                     </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Row, Col, Form, FormGroup, Label, Input, FormText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from "availity-reactstrap-validation";
 import PhoneInput from "./phoneInput"
 
 
@@ -18,6 +19,67 @@ class ModalBodyContent extends Component {
     renderBodyType = () => {
 
         switch(this.state.modalType) {
+
+            case "editInfo":
+                return (
+                            <AvForm>
+                                <AvGroup>
+                                    <Label>Job Title</Label>
+                                    <br></br>
+                                    <AvInput 
+                                        defaultValue={this.props.title} 
+                                        onChange={this.props.handleChange} 
+                                        type="text" 
+                                        bsSize="lg"
+                                        name="title"
+                                        className="infoInput">
+
+                                    </AvInput>
+                                </AvGroup>
+                                <AvGroup>
+                                    <Label>Company</Label>
+                                    <br></br>
+                                    <AvInput
+                                        defaultValue={this.props.company}
+                                        onChange={this.props.handleChange}
+                                        type="text"
+                                        bsSize="lg"
+                                        name="company"
+                                        className="infoInput">
+
+                                    </AvInput>
+                                </AvGroup>
+                                
+                                <AvGroup>
+                                    <Label>Location (City, State)</Label>
+                                    <br></br>
+                                    <AvField
+                                        validate={{ pattern: { value: /([A-Za-z]+(?: [A-Za-z]+)*),? ([A-Za-z]{2})/ } }}
+                                        defaultValue={this.props.location}
+                                        onChange={this.props.handleChange}
+                                        type="text"
+                                        bsSize="lg"
+                                        name="location"
+                                        className="infoInput">
+
+                                    </AvField>
+                                </AvGroup>
+                                <AvGroup>
+                                    <Label>Job Ad URL (link)</Label>
+                                    <br></br>
+                                    <AvField 
+                                        validate={{ pattern: { value: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ } }} 
+                                        defaultValue={this.props.jobAdURL} 
+                                        onChange={this.props.handleChange} 
+                                        type="text" 
+                                        bsSize="lg"
+                                        name="jobAdURL" 
+                                        className="infoInput">
+
+                                    </AvField>
+                                </AvGroup>
+                            </AvForm>
+                )
             case "editInterest":
                 return (
                             <Dropdown isOpen={this.props.dropDownOpen}  toggle={this.props.toggleDropDown}>
@@ -70,7 +132,9 @@ class ModalBodyContent extends Component {
                         <Form>
                             <FormGroup>
                                 <Dropdown isOpen={this.props.dropDownOpen}  toggle={this.props.toggleDropDown}>
-                                <DropdownToggle caret>
+                                <Label for="dropDownType">Type</Label>
+                                <br></br>
+                                <DropdownToggle name="dropDownType" caret>
                                     {this.props.lastCommType}
                                 </DropdownToggle>
                                 <DropdownMenu>

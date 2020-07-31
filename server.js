@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8080; // Step 1
 const routes = require('./routes/api');
 
 // Step 2
+mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/job_search', {
     useNewUrlParser: true,
     useUnifiedTopology: true

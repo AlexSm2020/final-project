@@ -17,6 +17,11 @@ const ModalExample = (props) => {
 
     const submit = () => {
         switch (modalType){
+            case "editInfo":
+                console.log("editInfo")
+                props.editInfo()
+                setModal(!modal)
+                break;
             case "editInterest":
                 console.log("editInterest")
                 props.editInterest()
@@ -58,7 +63,27 @@ const ModalExample = (props) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
-                    <ModalBodyContent taskTitle={props.taskTitle} taskDescription={props.taskDescription} currentInterest={props.currentInterest} lastCommDescription={props.lastCommDescription} lastCommDate={props.lastCommDate} lastCommType={props.lastCommType} poc={props.poc} pocEmail={props.pocEmail} pocPhone={props.pocPhone} modalNotes={props.modalNotes} handleChange={props.handleChange} dropDownValue={props.dropDownValue} dropDownOpen={dropDownOpen} toggleDropDown={props.toggleDropDown} changeDropDownValue={props.changeDropDownValue} modalType={modalType} />   
+                    <ModalBodyContent 
+                        title={props.title} 
+                        company={props.company}
+                        location={props.location} 
+                        jobAdURL={props.jobAdURL} 
+                        taskTitle={props.taskTitle} 
+                        taskDescription={props.taskDescription} 
+                        currentInterest={props.currentInterest} 
+                        lastCommDescription={props.lastCommDescription} 
+                        lastCommDate={props.lastCommDate} 
+                        lastCommType={props.lastCommType} 
+                        poc={props.poc} 
+                        pocEmail={props.pocEmail} 
+                        pocPhone={props.pocPhone} 
+                        modalNotes={props.modalNotes} 
+                        handleChange={props.handleChange} 
+                        dropDownValue={props.dropDownValue} 
+                        dropDownOpen={dropDownOpen} 
+                        toggleDropDown={props.toggleDropDown} 
+                        changeDropDownValue={props.changeDropDownValue} 
+                        modalType={modalType} />   
                 </ModalBody>
                 <ModalFooter>
                     <Button id={props.taskID} color="primary" onClick={submit}>Submit</Button>{' '}
