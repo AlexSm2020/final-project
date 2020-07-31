@@ -187,7 +187,7 @@ router.post("/task", async function (req, res) {
         const updatedApp = await db.Application.findByIdAndUpdate(req.body.applicationId, { $push: {tasks: dbTask._id}}, {new: true})
 
         const responseApp = await db.Application.findById({ _id: updatedApp._id })
-                                                    .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+            .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
 
         res.json(responseApp)
 
@@ -201,7 +201,6 @@ router.post("/task", async function (req, res) {
 
 router.put("/task/:id", async function (req, res) {
     try {
-            console.log(req.body)
             const filter = {_id: req.params.id}
             const update = {
                 title: req.body.title,
@@ -212,7 +211,7 @@ router.put("/task/:id", async function (req, res) {
             const updatedTask = await db.Task.findOneAndUpdate(filter, update, { new: true })
 
             const responseApp = await db.Application.findById({ _id: req.body.applicationId})
-                                                        .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+                .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
 
         res.json(responseApp)
 
@@ -226,12 +225,10 @@ router.put("/task/:id", async function (req, res) {
 
 router.delete("/task/:application/:id", async function (req, res) {
     try {
-        console.log(req.params.id)
-        console.log(req.params.application)
         await db.Task.deleteOne({_id: req.params.id})
 
         const response = await db.Application.findById({_id: req.params.application})
-                                                .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+            .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
 
         res.json(response)
         
@@ -240,6 +237,27 @@ router.delete("/task/:application/:id", async function (req, res) {
         console.log(error)
     }
 
+})
+
+// Updating application
+
+router.put("/application/:id", async function (req, res) {
+    try {
+            const id = req.params.id
+            const update = req.body
+
+            await db.Application.findByIdAndUpdate(id, update, {new: true})
+
+            const response = await db.Application.findById(id)
+                .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+        
+            
+            res.json(response)
+
+    }
+    catch (error) {
+        console.log(error)
+    }
 })
 
 

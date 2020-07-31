@@ -293,9 +293,23 @@ html {
 	margin-left: 7%;
 }
 
+.editInfoBtn {
+	float: right;
+	background: #007bff;
+	text-align: center;
+	margin-top: 3%;
+	margin-right: 15%;
+}
+
 .taskDescription {
 	text-align: left;
 	width: 250%;
+}
+
+.infoInput {
+	text-align: left;
+	width: 350%;
+
 }
 .notesText {
 	text-align: left;

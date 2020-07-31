@@ -91,7 +91,7 @@ class JobDetails_2 extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label>What was the last Communication type?</label>
+                    <label>What was the last Communication type? (Skip if not applicable)</label>
                     <select className="form-control" name="LastComm"  value={LastComm} onChange={handleChange('LastComm')}>
 
                         <option>In-Person</option>
