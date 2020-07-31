@@ -13,7 +13,15 @@ const ModalExample = (props) => {
 
     const [modal, setModal] = useState(false);
 
-    const toggle = () => setModal(!modal);
+    const toggleOpen = () => {
+        props.storeState()
+        setModal(!modal);
+    }
+
+    const toggleCancel = () => {
+        props.resetState()
+        setModal(!modal)
+    }
 
     const submit = () => {
         switch (modalType){
@@ -59,9 +67,9 @@ const ModalExample = (props) => {
 
     return (
         <div>
-            <Button className={className} color="primary" onClick={toggle}>{buttonLabel}</Button>
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
+            <Button className={className} color="primary" onClick={toggleOpen}>{buttonLabel}</Button>
+            <Modal isOpen={modal} toggle={toggleCancel}>
+                <ModalHeader toggle={toggleCancel}>{modalTitle}</ModalHeader>
                 <ModalBody>
                     <ModalBodyContent 
                         title={props.title} 
@@ -87,7 +95,7 @@ const ModalExample = (props) => {
                 </ModalBody>
                 <ModalFooter>
                     <Button id={props.taskID} color="primary" onClick={submit}>Submit</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                    <Button color="secondary" onClick={toggleCancel}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         </div>

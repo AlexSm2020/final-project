@@ -1,17 +1,22 @@
+// Importing react and component to power this page. Importing several components of reactstrap to format page. 
+// Importing Modal module for edit modals. 
+// Importiong axios to make database calls 
 import React, { Component } from 'react';
 import { Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
 import Stepper from 'react-stepper-horizontal'
 import Modal from "./modal"
 import Axios from 'axios';
 
+// Setting up our SingleApplication component as a class component
 
 class SingleApplication extends Component {
 
     constructor (props) {
         super (props)
+        // Setting initial state that will be updated to store application information to be rendered on screen
         this.state = {
-            appData: {},
             tasks: [],
+            // Storing steps which correspond in our stepper to specific application statuses.
             steps: [{
                 title: 'Pre-Application'
             }, {
@@ -25,11 +30,16 @@ class SingleApplication extends Component {
             }, {
                 title: 'Accepted Offer'
             }],
+            // Dropdown values in state will be used to track the value and toggle dropdowns in our modals. 
             dropDownOpen: false,
             dropDownValue: "Select"
         };
+
+        // Binding all functions below to the SingleApplication component. Necessary to be abel to use functions.
         this.onClickNext = this.onClickNext.bind(this)
         this.onClickBack = this.onClickBack.bind(this)
+        this.storeState = this.storeState.bind(this)
+        this.resetState = this.resetState.bind(this)
         this.toggleDropDown = this.toggleDropDown.bind(this)
         this.changeDropDownValue = this.changeDropDownValue.bind(this)
         this.editInfo = this.editInfo.bind(this)
@@ -44,25 +54,34 @@ class SingleApplication extends Component {
 
     }
 
+    // onClickNext triggers a change in status one step forward. 
+
     onClickNext() {
+        // Get current step from state
         const { currentStep } = this.state;
+        // Check to ensure current step isn't at the final step. If it is, we don't want to allow current step count to be greater than last step in array. 
         if (currentStep < 5) {
+            // Adding one to current step to push to next value in array
             let newStep = currentStep + 1
             let newStatus = this.state.steps[newStep]
+            // Building body for our put call with value of new step
             const body = {
                 status: newStatus.title
             }
+            // Put call to database to update application with new status.
             Axios.put("/user/application/" + this.state._id, body)
                 .then(response => {
                     this.setState(response.data)
                 })
-
+            // Setting state with current step.  
             this.setState({
                 currentStep: newStep
             })
         }
         
     }
+
+    // onClickBack performs same functionality as onClickNext, however subtracting one from current step instead of adding to implicate moving back one step in process.
     
     onClickBack() {
         const { currentStep } = this.state;
@@ -82,6 +101,21 @@ class SingleApplication extends Component {
         }
     }
 
+    // storeState stores current state in Local Storage. The purpose is to be able to access current state if user decides to cancel on any changes to application they made in edit screen.
+
+    storeState() {
+        localStorage.setItem("state", JSON.stringify(this.state))
+    }
+
+    // resetState will be called if user decides to cancel any edits. Editing will update state in real time, so resetState sets state back to what state was before entering edit screen.
+
+    resetState() {
+        console.log("reset state fired")
+        const savedState = JSON.parse(localStorage.getItem("state"))
+        this.setState(savedState)
+    }
+
+    // Toggle dropdown dynamically updates dropDownOpen boolean value which is used to open and close dropdowns in our modals. 
     toggleDropDown () {
         if (this.state.dropDownOpen) {
             this.setState({
@@ -95,13 +129,17 @@ class SingleApplication extends Component {
         }
     }
 
+    // changeDropDwonValue sets state based on value selected in dropdown. 
+
     changeDropDownValue (e) {
-        console.log(e.currentTarget.name)
+        // This function is used for two different dropdowns. The conditional checks to see if the event was triggered on our interestValue element. If so, we know that there was an update to interest. 
         if(e.currentTarget.name==="interestValue"){
+            // Setting new interest value in state to the text content selected from dropdown.
             this.setState({
                 dropDownValue: e.currentTarget.textContent,
                 interest: e.currentTarget.textContent
             })
+            // Else case is our other dropdown, which is to update the lastCommType in state.
         } else {
             this.setState({
                 dropDownValue: e.currentTarget.textContent,
@@ -111,38 +149,46 @@ class SingleApplication extends Component {
 
     }
 
+    // Edit info fires when the user submits an edit to the application info section. 
+
     editInfo(){
+        // With state having been dynamically updated upon input change, when user submits, state will be the data needed for the update call. 
         const body = {
             title: this.state.title,
             company: this.state.company,
             location: this.state.location,
             jobAdURL: this.state.jobAdURL
         }
+
+        // Axios call to api route for updating applicaiton, taking in application id from state and passing in body above as our update.
+        // Upon success, setting state with updated applicaiton data.
        
         Axios.put("/user/application/" + this.state._id, body)
             .then(response => {
-                console.log(response)
+                this.setState(response.data)
             })
 
     }
 
-    editInterest () {
-        console.log("Edit Interest function fired")
-        // Grabbing dropdown value to submit as interest level on api call
-        console.log(this.state.dropDownValue)
+    // Edit Interest call on submit of edit interest section.
 
+    editInterest () {
+        // changeDropDownValue sets state with dropDownValue selected, which we set as our request body for update call. 
         const body = {
             interest: this.state.dropDownValue
         }
 
+        // Axios call to api route for updating application, passing in our interest update as the request body. Upon success, updates state wtih newly saved application data.
         Axios.put("/user/application/" + this.state._id, body)
             .then(response => {
                 this.setState(response.data)
             })
     }
 
+    // Edit Notes section submits an update call with new notes on the application.
+    // Takes in updated notes from state and passes data to the update application api route. Upon success, updates state with newly saved application data.
+
     editNotes () {
-        console.log("Edit Notes function fired")
         const body = {
             notes: this.state.notes
         }
@@ -153,11 +199,20 @@ class SingleApplication extends Component {
             })
     }
 
+    // Edit task takes in changes made to task and saves edits to database. 
+
     editTask (id) {
+        // Setting three variables which will be passed as body of request for update call.
         let title;
         let dueDate;
         let description;
+
+        // As there are multiple tasks on a page, and we use the same three fields (editTaskTitle, editTaskDueDate and editTaskDescription) upon input change to record new values, it's possible that not all three fields were edited.
+        // if no change event fires, then the value in state will be blank (see end of function where values are cleared). 
         
+        // First conditional checks if task title in state isn't empty, which implies an edit was made. We set title equal to this value. 
+        // Else, set title equal to title saved in state for this task. Loop through tasks in state and match on id.
+
         if (this.state.editTaskTitle && this.state.editTaskTitle != "") {
             title = this.state.editTaskTitle
         } else {
@@ -167,6 +222,9 @@ class SingleApplication extends Component {
                 }
             })
         }
+
+        // Second conditional checks to see if editTaskdueDate isn't empty, which implies an edit. Set dueDate equal to this value if condition met.
+        // Else, set dueDate equal to value in state for task, implying no change.
 
         if (this.state.editTaskDueDate && this.state.editTaskDueDate != ""){
             dueDate = this.state.editTaskDueDate
@@ -178,6 +236,8 @@ class SingleApplication extends Component {
             })
         }
 
+        // Third conditional is the same functionality as with previous two, but for taskDescription.
+
         if (this.state.editTaskDescription && this.state.editTaskDescription != ""){
             description = this.state.editTaskDescription
         } else {
@@ -188,12 +248,18 @@ class SingleApplication extends Component {
             })
         }
 
+        // Once we've determined which values to pass for the update, set body of update including appplicationId
+
         const body = {
             title: title,
             dueDate: dueDate,
             description: description,
             applicationId: this.state._id
         }
+
+        // Axios request to database for update task route, saving new task in database. 
+        // As a response, new application data is passed to be set as state. 
+        // editTaskTitle, editTaskDueDate and editTaskDescription are cleared for next task edit.
 
         Axios.put("/user/task/" + id, body)
             .then(response => {
@@ -205,14 +271,6 @@ class SingleApplication extends Component {
                     editTaskDescription: ""
                 })
             })
-
-        this.setState({
-            editTaskTitle: "",
-            editTaskDueDate: "",
-            editTaskDescription: ""
-        })
-        console.log(title, dueDate, description)
-        console.log("Edit task function fired")
     }
 
     deleteTask (e) {
@@ -447,12 +505,10 @@ render () {
                                 <small className="companyLocation">{this.state.location}</small>
                             </div>
                         </h2>
-                        {/* <p>Company: </p>
-                        <p>Location: </p>    */}
                     </div>
                     <div>
                         <Stepper steps={this.state.steps} activeStep = {this.state.currentStep}  />
-                        <Modal title={this.state.title} company={this.state.company} location={this.state.location} jobAdURL={this.state.jobAdURL} handleChange={this.handleChange} editInfo={this.editInfo} modalType="editInfo" className="editInfoBtn" buttonLabel="Edit Info"> </Modal>
+                        <Modal storeState={this.storeState} resetState={this.resetState} title={this.state.title} company={this.state.company} location={this.state.location} jobAdURL={this.state.jobAdURL} handleChange={this.handleChange} editInfo={this.editInfo} modalTitle="Edit Applicaiton Info" modalType="editInfo" className="editInfoBtn" buttonLabel="Edit Info"> </Modal>
                         <Button className="statusBtn" onClick={this.onClickBack}>Move Back </Button>
                         <Button className="statusBtn" onClick={ this.onClickNext }>Move Forward </Button>
                     </div>
@@ -469,7 +525,7 @@ render () {
                                 <Card className="notesCard">
                                     <CardBody>
                                         <CardText>{this.state.notes}</CardText>
-                                        <Modal modalNotes={this.state.notes} handleChange={this.handleChange} editNotes={this.editNotes} modalTitle="Edit Notes" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editNotes" className="notesBtn" buttonLabel="Edit Notes" />
+                                        <Modal storeState={this.storeState} resetState={this.resetState} modalNotes={this.state.notes} handleChange={this.handleChange} editNotes={this.editNotes} modalTitle="Edit Notes" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editNotes" className="notesBtn" buttonLabel="Edit Notes" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -484,7 +540,7 @@ render () {
                                         <CardText>Type: {this.state.lastCommType} </CardText>
                                         <CardText>Last Communication Date: {this.state.lastCommDate} </CardText>
                                         <CardText>Description: {this.state.lastCommDescription}</CardText>
-                                        <Modal lastCommType={this.state.lastCommType} lastCommDate={this.state.lastCommDate} lastCommDescription={this.state.lastCommDescription} handleChange={this.handleChange} editComm={this.editComm} modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
+                                        <Modal storeState={this.storeState} resetState={this.resetState} lastCommType={this.state.lastCommType} lastCommDate={this.state.lastCommDate} lastCommDescription={this.state.lastCommDescription} handleChange={this.handleChange} editComm={this.editComm} modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
 
                                     </CardBody>
                                 </Card>
@@ -502,7 +558,7 @@ render () {
                                 <Card className="interestCard">
                                     <CardBody>
                                         <CardText className="interestText">{this.state.interest}</CardText>
-                                        <Modal currentInterest={this.state.interest} handleChange={this.handleChange} editInterest={this.editInterest} modalTitle="Edit Interest" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
+                                        <Modal storeState={this.storeState} resetState={this.resetState} currentInterest={this.state.interest} handleChange={this.handleChange} editInterest={this.editInterest} modalTitle="Edit Interest" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
                                         <Button className="jobAdBtn">View Job Ad</Button>
                                     </CardBody>
                                 </Card>
@@ -517,7 +573,7 @@ render () {
                                         <CardText>Point of Contact: {this.state.poc} </CardText>
                                         <CardText>Email Address: {this.state.pocEmail} </CardText>
                                         <CardText>Phone Number: {this.state.pocPhone} </CardText>
-                                        <Modal poc={this.state.poc} pocEmail={this.state.pocEmail} pocPhone={this.state.pocPhone} handleChange={this.handleChange} editContact={this.editContact} modalTitle="Edit Contact Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editContact" className="contactBtn" buttonLabel="Edit Info" />
+                                        <Modal storeState={this.storeState} resetState={this.resetState} poc={this.state.poc} pocEmail={this.state.pocEmail} pocPhone={this.state.pocPhone} handleChange={this.handleChange} editContact={this.editContact} modalTitle="Edit Contact Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editContact" className="contactBtn" buttonLabel="Edit Info" />
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -531,7 +587,7 @@ render () {
                     <Col className="colMargin" xs="8">
                         <div>
                             <h4 className="taskHeader">Tasks</h4>
-                            <Modal handleChange={this.handleChange} addTask={this.addTask} modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
+                            <Modal storeState={this.storeState} resetState={this.resetState} handleChange={this.handleChange} addTask={this.addTask} modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
                         </div>
                         {this.state.tasks.map(task => {
                             return (
@@ -540,7 +596,7 @@ render () {
                                         <CardText>Title: {task.title} </CardText>
                                         <CardText>Due Date: {task.dueDate} </CardText>
                                         <CardText>Description: {task.description} </CardText>
-                                        <Modal taskTitle={task.title} taskDescription={task.description} taskID={task._id} handleChange={this.handleChange} editTask={this.editTask} modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
+                                        <Modal storeState={this.storeState} resetState={this.resetState} taskTitle={task.title} taskDescription={task.description} taskID={task._id} handleChange={this.handleChange} editTask={this.editTask} modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
                                         <Button id={task._id} className="deleteTaskBtn" color="danger" onClick={e => {this.deleteTask(e)}}>Delete Task</Button>
                                     </CardBody>
                                 </Card>
