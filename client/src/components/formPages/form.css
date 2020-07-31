@@ -33,6 +33,23 @@ label{
     width: 80%;
     padding: 1rem;
     border-color: #2980b9;
+}
+.phone-input{
+    border-color: #2980b9;
+    border-width: 2px;
+    border-radius: 5px;
+    width: 83%;
+    padding: 1rem;
+    border-color: #2980b9;
+}
+.date-input{
+    border-color: #2980b9;
+    border-width: 2px;
+    border-radius: 5px;
+    width: 83%;
+    padding: 1rem;
+    border-color: #2980b9;
+
 
 }
 

@@ -8,9 +8,6 @@ const PhoneInputComponent = (props) => {
         props.handleChange(e);
         setValue();
     }
-    handleChange = input => e => {
-        this.setState({[input]: e.target.value});
-    }
 
     return (
         

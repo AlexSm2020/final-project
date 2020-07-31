@@ -274,7 +274,7 @@ render () {
                                     <Modal handleChange={this.handleChange} addTask={this.addTask} modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
                                 </div>
                                 <Card className="taskCard">
-                                    <CardBody class="taskBody">
+                                    <CardBody className="taskBody">
                                         <CardText>Title: </CardText>
                                         <CardText>Description: </CardText>
                                         <Modal handleChange={this.handleChange} editTask={this.editTask} modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />

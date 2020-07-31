@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step} from "react-step-progress-bar";
 import './form.css';
+import {  Label, Input } from 'reactstrap';
  
 const options = [
     { value: 'one', label: 'One' },
@@ -70,21 +70,19 @@ class JobDetails_2 extends Component {
                 <h3>Enter your job information:</h3>
                 <div className="form-group">
                     <label>What is the current status of this Job?</label>
-                    <select className="form-control" name="status" defaultValue="" value={status} onChange={handleChange('status')}>
+                    <select className="form-control" name="status"  value={status} onChange={handleChange('status')}>
 
                         <option>Pre-application</option>
-                        <option>New</option>
-                        <option>Phone Screen</option>
+                        <option>Submitted Application</option>
                         <option>Interview</option>
-                        <option>Coding Assessment</option>
-                        <option>Offer</option>
-                        <option>Accepted</option>
-                        <option>Rejected</option>
+                        <option>Assessment</option>
+                        <option>Offered</option>
+                        <option>Accepted Offer</option>
                     </select>
                 </div>
                 <div className="form-group">
                     <label>What is your level of interest to this Job?</label>
-                    <select className="form-control" name="interest" defaultValue="" value={interest} onChange={handleChange('interest')}>
+                    <select className="form-control" name="interest"  value={interest} onChange={handleChange('interest')}>
 
                         <option>Highly Interested</option>
                         <option>Interested</option>
@@ -92,25 +90,23 @@ class JobDetails_2 extends Component {
                         <option>Not Interested</option>
                     </select>
                 </div>
+                <div className="form-group">
+                    <label>What was the last Communication type?</label>
+                    <select className="form-control" name="LastComm"  value={LastComm} onChange={handleChange('LastComm')}>
+
+                        <option>In-Person</option>
+                        <option>Email</option>
+                        <option>Phone Call</option>
+                        <option>Video Call</option>
+                        <option>Text</option>
+                    </select>
+                </div>
                 <label>
-                    <input 
-                        type="text"
-                        name="LastComm"
-                        value={LastComm}
-                        onChange={handleChange('LastComm')}
-                        placeholder="Last Communication"
-                    />
+                    <label>What was the last Communication date?</label>
+                    <Input className="date-input" defaultValue={LastCommDate} onChange={handleChange('LastCommDate')} type="date" bsSize="lg" name="LastCommDate" className="taskDueDate"></Input>
+ 
                 </label>
-                <label>
-                    <input 
-                        type="text"
-                        name="LastCommDate"
-                        value={LastCommDate}
-                        onChange={handleChange('LastCommDate')}
-                        placeholder="Last Communication Date"
-                    />
-                </label>
-            
+                
                 <button className="Back" onClick={this.back}>
                     « Back
                 </button>
