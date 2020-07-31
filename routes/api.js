@@ -97,6 +97,7 @@ router.post('/indeed', function (req, res) {
 router.post("/startApplication", async function (req, res) {
     
     try {
+        
         const application = {
             title: req.body.title,
             location: req.body.location,

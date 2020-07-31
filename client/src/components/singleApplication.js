@@ -3,6 +3,7 @@
 // Importiong axios to make database calls 
 import React, { Component } from 'react';
 import { Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
+import { Link } from "react-router-dom"
 import Stepper from 'react-stepper-horizontal'
 import Modal from "./modal"
 import Axios from 'axios';
@@ -457,11 +458,10 @@ class SingleApplication extends Component {
 
 
     componentDidMount() {
+        let appID = this.props.location.state.application._id
 
-        var appID = this.props.location.state.application._id
         Axios.get("/user/applications/" + appID)
             .then(response => {
-                console.log(response)
                 this.setState(response.data)
                 var currentStep;
                 switch (response.data.status) {
@@ -559,7 +559,7 @@ render () {
                                     <CardBody>
                                         <CardText className="interestText">{this.state.interest}</CardText>
                                         <Modal storeState={this.storeState} resetState={this.resetState} currentInterest={this.state.interest} handleChange={this.handleChange} editInterest={this.editInterest} modalTitle="Edit Interest" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editInterest" className="editInterestBtn" buttonLabel="Edit Interest" />
-                                        <Button className="jobAdBtn">View Job Ad</Button>
+                                        <Link to={{ pathname: this.state.jobAdURL }} target="_blank"><Button className="jobAdBtn">View Job Ad</Button></Link>
                                     </CardBody>
                                 </Card>
                             </Col>
