@@ -115,7 +115,7 @@ class Search extends React.Component {
                                 jobType={this.state.jobType}
                                 modalId={"search-modal"}
                                 modalButtonColor={"success"}
-                                modalButtonText={"Save"}
+                                modalButtonText={"Save Search"}
                                 modalHeader={
                                 <Form>
                                 <Label for="name">Enter a name to save your search</Label>
