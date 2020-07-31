@@ -167,17 +167,87 @@ router.get("/applications", function (req, res) {
 
 router.get("/applications/:id", function (req, res) {
     db.Application.findById({_id: req.params.id})
-        .populate({path: "tasks", options: { sort: {"createdAt": -1}}})
+        .populate({path: "tasks", options: { sort: {"dueDate": 1}}})
         .then(dbApplication => {
             res.json(dbApplication)
         })
 })
 
-// Updating Task
+// Adding Task
+
+router.post("/task", async function (req, res) {
+    try{
+        const dbTask = await db.Task.create({
+                                                title: req.body.taskTitle,
+                                                dueDate: req.body.taskDueDate,
+                                                description: req.body.taskDescription
+                                            })
+
+        const updatedApp = await db.Application.findByIdAndUpdate(req.body.applicationId, { $push: {tasks: dbTask._id}}, {new: true})
+
+        const responseApp = await db.Application.findById({ _id: updatedApp._id })
+                                                    .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+
+        res.json(responseApp)
+
+    }
+    catch (error) {
+        console.log(error)
+    }
+})
+
+// Updating  Task
+
+router.put("/task/:id", async function (req, res) {
+    try {
+            console.log(req.body)
+            const filter = {_id: req.params.id}
+            const update = {
+                title: req.body.title,
+                dueDate: req.body.dueDate,
+                description: req.body.description
+            }
+
+            const updatedTask = await db.Task.findOneAndUpdate(filter, update, { new: true })
+
+            const responseApp = await db.Application.findById({ _id: req.body.applicationId})
+                                                        .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+
+        res.json(responseApp)
+
+    }
+    catch (error) {
+        console.log(error)
+    }
+})
+
+// Delete Task
+
+router.delete("/task/:application/:id", async function (req, res) {
+    try {
+        console.log(req.params.id)
+        console.log(req.params.application)
+        await db.Task.deleteOne({_id: req.params.id})
+
+        const response = await db.Application.findById({_id: req.params.application})
+                                                .populate({ path: "tasks", options: { sort: { "dueDate": 1 } } })
+
+        res.json(response)
+        
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+})
+
+
 
 // Saving and getting searches
 router.post("/savesearch", async function(req, res) {
- try {const savedSearch =  await  db.SavedSearches.create({
+ try {
+     
+    const savedSearch =  await  db.SavedSearches.create({
         name: req.body.name,
         query: req.body.query,
         location: req.body.location,

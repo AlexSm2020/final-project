@@ -49,19 +49,19 @@ class ModalBodyContent extends Component {
                 return (
                         <Form>
                             <FormGroup>
-                                <Label for="taskTitle">Title</Label>
+                                <Label for="editTaskTitle">Title</Label>
                                 <br></br>
-                                <Input onChange={this.props.handleChange} type="text" bsSize="lg" name="taskTitle" className="taskTitle"></Input>
+                                <Input defaultValue={this.props.taskTitle} onChange={this.props.handleChange} type="text" bsSize="lg" name="editTaskTitle" className="taskTitle"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="taskDueDate">Due Date</Label>
+                                <Label for="editTaskDueDate">Due Date</Label>
                                 <br></br>
-                                <Input onChange={this.props.handleChange} type="date" bsSize="lg" name="taskDueDate" className="taskDueDate"></Input>
+                                <Input onChange={this.props.handleChange} type="date" bsSize="lg" name="editTaskDueDate" className="taskDueDate"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="taskDescription">Description</Label>
+                                <Label for="editTaskDescription">Description</Label>
                                 <br></br>
-                                <Input onChange={this.props.handleChange} type="textarea" bsSize="lg" name="taskDescription" className="taskDescription"></Input>
+                                <Input defaultValue={this.props.taskDescription} onChange={this.props.handleChange} type="textarea" bsSize="lg" name="editTaskDescription" className="taskDescription"></Input>
                             </FormGroup>
                         </Form>
                         )
@@ -117,7 +117,25 @@ class ModalBodyContent extends Component {
                         </Form>
                 )
             case "addTask":
-                return (<div>Add Task</div>)
+                return (
+                    <Form>
+                        <FormGroup>
+                            <Label for="addTaskTitle">Title</Label>
+                            <br></br>
+                            <Input onChange={this.props.handleChange} type="text" bsSize="lg" name="addTaskTitle" className="taskTitle"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="addTaskDueDate">Due Date</Label>
+                            <br></br>
+                            <Input onChange={this.props.handleChange} type="date" bsSize="lg" name="addTaskDueDate" className="taskDueDate"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="addTaskDescription">Description</Label>
+                            <br></br>
+                            <Input onChange={this.props.handleChange} type="textarea" bsSize="lg" name="addTaskDescription" className="taskDescription"></Input>
+                        </FormGroup>
+                    </Form>
+                    )
             default:
                 return null
         }

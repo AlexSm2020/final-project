@@ -73,13 +73,14 @@ logout = () => {
             </Header>
           </Conditional>
           <Conditional if={this.state.loggedIn===false}>
-            {null}
-              {/* <Navigation>
-                <Link to="/about">About Us</Link>
+            <Header className="header-color" title={<Link style={{ textDecoration: 'none', color: 'white' }} to="/">DreamJob</Link>} scroll>
+              <Navigation>
                 <Link to="/register">Register Today</Link>
                 <Link to="/login">Log In</Link>
+                <Link to="/about">About Us</Link>
                 <Link to="/contact">Contact</Link>
-              </Navigation> */}
+              </Navigation>
+            </Header>
           </Conditional>
           <Drawer title={<Link style={{textDecoration: 'none', color: 'black'}} to="/">DreamJob</Link>}>
           <Conditional if={this.state.loggedIn===true}>
@@ -93,13 +94,12 @@ logout = () => {
             </Navigation>
           </Conditional>
           <Conditional if={this.state.loggedIn === false}>
-              {null}
-              {/* <Navigation>
+                <Navigation>
                 <Link to="/about">About Us</Link>
                 <Link to="/register">Register Today</Link>
                 <Link to="/login">Log In</Link>
                 <Link to="/about">Contact</Link>
-              </Navigation> */}
+              </Navigation>
             </Conditional>
           </Drawer>
         <Content>

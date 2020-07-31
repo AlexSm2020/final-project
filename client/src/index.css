@@ -246,14 +246,14 @@ html {
 	text-align: center;
 }
 
-.contactBtn, .notesBtn, .addTask, .lastCommBtn, .editTaskBtn {
+.contactBtn, .notesBtn, .addTask, .lastCommBtn {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .colMargin {
-	margin-top: 3%;
+	margin-top: 2%;
 }
 
 .jobAdBtn{
@@ -263,6 +263,16 @@ html {
 .editInterestBtn {
 	float: left;
 	margin-left: 20%;
+}
+
+.editTaskBtn {
+	float: left;
+	margin-left: 30%;
+}
+
+.deleteTaskBtn {
+	float: right;
+	margin-right: 30%;
 }
 
 .taskCard {

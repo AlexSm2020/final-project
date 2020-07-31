@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
+import { Jumbotron, Container, Row, Col, Card, Button, CardText, CardBody } from 'reactstrap';
 import Stepper from 'react-stepper-horizontal'
 import Modal from "./modal"
 import Axios from 'axios';
@@ -12,6 +11,7 @@ class SingleApplication extends Component {
         super (props)
         this.state = {
             appData: {},
+            tasks: [],
             steps: [{
                 title: 'Pre-Application'
             }, {
@@ -39,6 +39,7 @@ class SingleApplication extends Component {
         this.editComm = this.editComm.bind(this)
         this.editContact = this.editContact.bind(this)
         this.addTask = this.addTask.bind(this)
+        this.deleteTask = this.deleteTask.bind(this)
         this.handleChange = this.handleChange.bind(this)
 
     }
@@ -101,8 +102,76 @@ class SingleApplication extends Component {
         console.log("Edit Notes function fired")
     }
 
-    editTask () {
+    editTask (id) {
+        let title;
+        let dueDate;
+        let description;
+        
+        if (this.state.editTaskTitle && this.state.editTaskTitle != "") {
+            title = this.state.editTaskTitle
+        } else {
+            this.state.tasks.forEach(task => {
+                if (id===task._id) {
+                    title=task.title
+                }
+            })
+        }
+
+        if (this.state.editTaskDueDate && this.state.editTaskDueDate != ""){
+            dueDate = this.state.editTaskDueDate
+        } else {
+            this.state.tasks.forEach(task => {
+                if (id===task._id) {
+                    dueDate = task.dueDate
+                }
+            })
+        }
+
+        if (this.state.editTaskDescription && this.state.editTaskDescription != ""){
+            description = this.state.editTaskDescription
+        } else {
+            this.state.tasks.forEach(task => {
+                if(id===task._id) {
+                    description = task.description
+                }
+            })
+        }
+
+        const body = {
+            title: title,
+            dueDate: dueDate,
+            description: description,
+            applicationId: this.state._id
+        }
+
+        Axios.put("/user/task/" + id, body)
+            .then(response => {
+                console.log(response)
+                this.setState(response.data)
+                this.setState({
+                    editTaskTitle: "",
+                    editTaskDueDate: "",
+                    editTaskDescription: ""
+                })
+            })
+
+        this.setState({
+            editTaskTitle: "",
+            editTaskDueDate: "",
+            editTaskDescription: ""
+        })
+        console.log(title, dueDate, description)
         console.log("Edit task function fired")
+    }
+
+    deleteTask (e) {
+        console.log(e.currentTarget.id)
+        console.log("delete task function")
+
+        Axios.delete("/user/task/" + this.state._id +  "/" + e.currentTarget.id)
+            .then(response => {
+                this.setState(response.data)
+            })
     }
 
     editComm () {
@@ -117,6 +186,17 @@ class SingleApplication extends Component {
 
     addTask() {
         console.log("Add task function fired")
+        const body = {
+            applicationId: this.state._id,
+            taskTitle: this.state.taskTitle,
+            taskDueDate: this.state.taskDueDate,
+            taskDescription: this.state.taskDescription
+        }
+
+        Axios.post("/user/task", body)
+            .then(response=> {
+                this.setState(response.data)
+            })
     }
 
 
@@ -141,19 +221,37 @@ class SingleApplication extends Component {
                         notes: e.currentTarget.value
                     })
                     break;
-                case "taskTitle":
+                case "addTaskTitle":
                     console.log("taskTitle")
                     this.setState({
                         taskTitle: e.currentTarget.value
                     })
                     break;
-                case "taskDueDate":
+                case "addTaskDueDate":
                     console.log("taskDueDate")
                     this.setState({
                         taskDueDate: e.currentTarget.value
                     })
                     break;
-                case "taskDescription":
+                case "editTaskTitle":
+                    console.log("editTaskTitle")
+                    this.setState({
+                        editTaskTitle: e.currentTarget.value
+                    })
+                    break;
+                case "editTaskDueDate":
+                    console.log("editTaskDueDate")
+                    this.setState({
+                        editTaskDueDate: e.currentTarget.value
+                    })
+                    break;
+                case "editTaskDescription":
+                    console.log("editTaskDescription")
+                    this.setState({
+                        editTaskDescription: e.currentTarget.value
+                    })
+                    break;
+                case "addTaskDescription":
                     console.log("taskDescription")
                     this.setState({
                         taskDescription: e.currentTarget.value
@@ -269,18 +367,15 @@ render () {
                         <Row>
                             <Col xs="1"></Col>
                             <Col className="colMargin" xs="10">
-                                <div>
-                                    <h4 className="taskHeader">Tasks</h4>
-                                    <Modal handleChange={this.handleChange} addTask={this.addTask} modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
-                                </div>
-                                <Card className="taskCard">
-                                    <CardBody class="taskBody">
-                                        <CardText>Title: </CardText>
-                                        <CardText>Description: </CardText>
-                                        <Modal handleChange={this.handleChange} editTask={this.editTask} modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
+                                <h4 className="lastCommTitle">Last Communication</h4>
+                                <Card>
+                                    <CardBody class="lastCommBody">
+                                        <CardText>Type: {this.state.lastCommType} </CardText>
+                                        <CardText>Last Communication Date: {this.state.lastCommDate} </CardText>
+                                        <CardText>Description: {this.state.lastCommDescription}</CardText>
+                                        <Modal lastCommType={this.state.lastCommType} lastCommDate={this.state.lastCommDate} lastCommDescription={this.state.lastCommDescription} handleChange={this.handleChange} editComm={this.editComm} modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
                                     </CardBody>
                                 </Card>
-
                             </Col>
                             <Col xs="1"></Col>
 
@@ -319,25 +414,31 @@ render () {
                     </Col>
                 </Row>
                 <Row xs="2">
-                    <Col xs="7">
-
-                    </Col>
-                    <Col xs="5">
-                        <Row>
-                            <Col className="colMargin" xs="11">
-                            <h4 className="lastCommTitle">Last Communication</h4>
-                                <Card>
-                                    <CardBody class="lastCommBody">
-                                        <CardText>Type: {this.state.lastCommType} </CardText>
-                                        <CardText>Last Communication Date: {this.state.lastCommDate} </CardText>
-                                        <CardText>Description: {this.state.lastCommDescription}</CardText>
-                                        <Modal lastCommType={this.state.lastCommType} lastCommDate={this.state.lastCommDate} lastCommDescription={this.state.lastCommDescription} handleChange={this.handleChange} editComm={this.editComm} modalTitle="Edit Last Communication Info" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editComm" className="lastCommBtn" buttonLabel="Edit Last Comm" />
+                    
+                    <Col xs="2"></Col>
+                    <Col className="colMargin" xs="8">
+                        <div>
+                            <h4 className="taskHeader">Tasks</h4>
+                            <Modal handleChange={this.handleChange} addTask={this.addTask} modalTitle="Add Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="addTask" className="addTask" buttonLabel="Add Task" />
+                        </div>
+                        {this.state.tasks.map(task => {
+                            return (
+                                <Card className="taskCard">
+                                    <CardBody className="taskBody">
+                                        <CardText>Title: {task.title} </CardText>
+                                        <CardText>Due Date: {task.dueDate} </CardText>
+                                        <CardText>Description: {task.description} </CardText>
+                                        <Modal taskTitle={task.title} taskDescription={task.description} taskID={task._id} handleChange={this.handleChange} editTask={this.editTask} modalTitle="Edit Task" dropDownOpen={this.state.dropDownOpen} dropDownValue={this.state.dropDownValue} toggleDropDown={this.toggleDropDown} changeDropDownValue={this.changeDropDownValue} modalType="editTask" className="editTaskBtn" buttonLabel="Edit Task" />
+                                        <Button id={task._id} className="deleteTaskBtn" color="danger" onClick={e => {this.deleteTask(e)}}>Delete Task</Button>
                                     </CardBody>
                                 </Card>
-                            </Col>
-                            <Col xs="1"></Col>
-                        </Row>
+                            )
+                        })}
+
                     </Col>
+                    <Col xs="2"></Col>
+
+            
                 </Row>
             </Container>
         </div>
