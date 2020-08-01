@@ -11,12 +11,18 @@ const PORT = process.env.PORT || 8080; // Step 1
 
 const routes = require('./routes/api');
 
+const options = {
+    useNewURLParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    family: 4
+};
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/job_search'
+
 // Step 2
 mongoose.set('useFindAndModify', false);
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/job_search', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(MONGODB_URI, options);
 
 mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
