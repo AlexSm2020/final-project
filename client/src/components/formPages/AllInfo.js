@@ -14,8 +14,6 @@ class AllInfo extends Component {
     submit = (e,data) => {
         e.preventDefault();
         // PROCESS FORM //
-        console.log(data)
-
         const appPayload = {
             title: data.jobTitle,
             location: data.jobLocation,
@@ -34,6 +32,7 @@ class AllInfo extends Component {
         Axios.post("/user/startApplication", appPayload)
             .then((response) => {
                 console.log(response)
+                window.location = "/applications"
             })
             .catch(error => {
                 console.log(error.message)
