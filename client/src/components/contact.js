@@ -30,17 +30,18 @@ export default class MyForm extends React.Component {
   render() {
     const { status } = this.state;
     return (
-      <form
+      <form className="contact-us"
         onSubmit={this.submitForm}
         action="https://formspree.io/xoqkypno"
         method="POST"
       >
+        <h3>Please get in touch!</h3>
         {/* <!-- add your custom form HTML here --> */}
         <label>Email:</label>
-        <input type="email" name="email" />
+        <input className="contact-Email" type="email" name="email" />
         <label>Message:</label>
-        <input type="text" name="message" />
-        {status === "SUCCESS" ? <p>Thanks!</p> : <button>Submit</button>}
+        <input className="msg-Email" type="text" name="message" />
+        {status === "SUCCESS" ? <p>Thanks!</p> : <button className="submit-contactUs">Submit</button>}
         {status === "ERROR" && <p>Ooops! There was an error.</p>}
       </form>
     );

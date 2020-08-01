@@ -10,6 +10,41 @@ form {
 .form-input {
   margin: 10px 0px;
 }
+.contact-us{
+  margin-left: 30px;
+  margin-top: 50px;
+}
+.contact-Email{
+  max-width: 500px;
+  border: 2px solid #2980b9;
+  overflow: hidden;
+  border-radius: 1em;
+}
+.aboutUsPage{
+  margin-left: 30px;
+}
+.ref-aboutUs1{
+  padding: 5.5%;
+}
+.ref-aboutUs2{
+  padding: 7.7%;
+}
+.ref-aboutUs3{
+  padding: 4.9%;
+}
+.ref-aboutUs4{
+  padding: 6.8%;
+}
+.msg-Email{
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 2px solid #2980b9;
+  padding: 5rem;
+  overflow: hidden;
+}
+.submit-contactUs{
+  margin-left: 1rem;
+}
 
 .form-input input, .form-input textarea {
   width: 100%;
