@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
+// Schema
 const SavedSearchesSchema = new Schema({
     name: {
         type: String,
@@ -30,6 +31,7 @@ const SavedSearchesSchema = new Schema({
     timestamps: true
 });
 
+// Model
 const SavedSearches = mongoose.model("SavedSearches", SavedSearchesSchema);
 
 module.exports = SavedSearches;

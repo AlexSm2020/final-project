@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route} from 'react-router-dom';
 
-import LandingPage from './landingpage';
+import LandingPage from './LandingPage';
 import About from './about';
 import Contact from './contact';
 import LogIn from './logIn';
 import Register from './register';
-import Search from './search';
+import Search from './Search';
 import UserForm from './userForm'
 import Applications from './applications';
 import SingleApplication from './singleApplication';
