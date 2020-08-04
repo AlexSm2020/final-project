@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
 import SearchModal from './SearchModal';
 
+// Render card with job details returned from API
+
 function SearchResultCard(props) {
     return (
         <div className="job-card card">

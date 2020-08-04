@@ -4,11 +4,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 const SearchModal = (props) => {
-
+    
+    // Set up modal toggling
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
+    // Store searcu input values and save to database
     const handleSearchSave = () => {
 
         const searchObject = {
@@ -23,7 +25,7 @@ const SearchModal = (props) => {
             .then(toggle())
     }
 
-    // Setting application details to state for tracking
+    // Set application details to state to use for tracking form autofill
     const trackApplication = () => {
 
         let applicationObject = {
@@ -38,6 +40,10 @@ const SearchModal = (props) => {
     }
 
     return (
+        
+        // If saving search render input for search name
+        // If tracking application render button for confirmation and redirect
+
         <div id={props.modalId}>
             <Button color={props.modalButtonColor} onClick={toggle}>{props.modalButtonText}</Button>
             <Modal centered isOpen={modal}>

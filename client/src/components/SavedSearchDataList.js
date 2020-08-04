@@ -1,7 +1,7 @@
 import React from 'react';
-import { FormGroup, Label } from 'reactstrap';
 
-function SavedSearchSelect(props) {
+// Datalist input for saved searches
+function SavedSearchDataList(props) {
     return (
             <datalist id="savedSearches" onChange={props.onChange}>
             {props.children}
@@ -9,4 +9,4 @@ function SavedSearchSelect(props) {
     )
 }
 
-export default SavedSearchSelect;
+export default SavedSearchDataList;
