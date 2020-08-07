@@ -22,8 +22,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const routes = require('./routes/api');
-
 const options = {
     useNewURLParser: true,
     useUnifiedTopology: true,
