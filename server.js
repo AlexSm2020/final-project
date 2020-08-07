@@ -27,7 +27,7 @@ if (inProduction) {
     app.use(express.static(path.join(__dirname, './client/build')))
 
     app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, './client/build/index.html'))
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     });
 }
 
@@ -66,5 +66,12 @@ app.use(passport.session());
 // HTTP request logger
 app.use(morgan('tiny'));
 app.use('/user', routes);
+
+const proxy = require('http-proxy-middleware')
+
+module.exports = function (app) {
+    // add other server routes to path array
+    app.use(proxy(['/api'], { target: 'http://localhost:8080' }));
+} 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
