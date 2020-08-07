@@ -9,6 +9,15 @@ const session = require("express-session")
 const app = express();
 const PORT = process.env.PORT || 8080; // Step 1
 
+// Production Mode
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname = "/client/build/index.html"))
+    });
+}
+
 const routes = require('./routes/api');
 
 const options = {
@@ -41,16 +50,6 @@ app.use( (req, res, next) => {
 });
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Step 3
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'client/build')));
-
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname + "/client/public/index.html"))
-    });
-}
 
 // HTTP request logger
 app.use(morgan('tiny'));
