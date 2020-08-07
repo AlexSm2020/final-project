@@ -5,16 +5,25 @@ const morgan = require('morgan');
 const path = require('path');
 const passport = require("./config/passport")
 const session = require("express-session")
+const cors = require('cors')
 
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 8080; // Step 1
 
+const inProduction = process.env.NODE_ENV==="production"
+
+app.use(
+    cors({
+        origin: inProduction ? "https://dreamjob2.herokuapp.com" : "http://localhost:3000"
+    })
+);
+
 const routes = require('./routes/api');
 
 // Production Mode
-if (process.env.NODE_ENV === 'production') {
+if (inProduction) {
     app.use(express.static(path.join(__dirname, './client/build')))
 
     app.get("*", (req, res) => {
