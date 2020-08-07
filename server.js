@@ -67,11 +67,10 @@ app.use(passport.session());
 app.use(morgan('tiny'));
 app.use('/user', routes);
 
-const proxy = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
-module.exports = function (app) {
-    // add other server routes to path array
-    app.use(proxy(['/api'], { target: 'http://localhost:8080' }));
-} 
+app.use('/user', createProxyMiddleware({ target: 'https://dreamjob2.herokuapp.com', changeOrigin: true }))
+
+// add other server routes to path array
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
