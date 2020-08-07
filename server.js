@@ -22,6 +22,7 @@ const routes = require('./routes/api');
 
 const options = {
     useNewURLParser: true,
+    useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
     family: 4
