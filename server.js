@@ -60,9 +60,9 @@ if (inProduction) {
     });
 }
 
-const { createProxyMiddleware } = require('http-proxy-middleware')
+// const { createProxyMiddleware } = require('http-proxy-middleware')
 
-app.use('/user', createProxyMiddleware({ target: 'https://dreamjob2.herokuapp.com', changeOrigin: true }))
+// app.use('/user', createProxyMiddleware({ target: 'https://dreamjob2.herokuapp.com', changeOrigin: true }))
 
 // add other server routes to path array
 
